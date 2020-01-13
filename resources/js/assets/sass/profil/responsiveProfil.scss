@@ -1,0 +1,52 @@
+
+
+@media(max-width: 1313px){
+
+
+    .container-profil {
+        display: block;
+
+
+        width: 100%;
+    }
+
+   .container-profil .edit{
+        width: 100%;
+    }
+
+    .container-profil .showProfil{
+        margin:auto;
+       width: 100%;
+    }
+
+    .container-profil  .editMainForm .form-group-TheProgrammer .editMainDivLabel{
+        text-align: left;
+
+
+    }
+
+    .container-profil .editMainForm .form-group-TheProgrammer .editMainDivInput{
+
+        margin-left: 0;
+    }
+
+}
+
+@media (max-width: 853px)
+{
+    .container-profil{
+
+
+    }
+    .container-profil .showProfil{
+
+
+    }
+
+    .container-profil .edit{
+
+
+
+    }
+}
+

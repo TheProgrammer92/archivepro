@@ -1,0 +1,40 @@
+
+
+
+.video{
+
+
+    width:75%;
+
+    display:flex;
+    flex-direction: column;
+    border-bottom:1px solid rgba(0,0,0,0.1);
+    padding:0px 0;
+    margin:0 auto;
+
+
+    video{
+
+
+        height: 600px;
+        margin:auto;
+
+
+
+
+    }
+
+
+
+    .info-video{
+
+        margin-top: 25px;
+    }
+
+    i.small{
+
+        font-size: 1.5rem;
+    }
+
+
+}

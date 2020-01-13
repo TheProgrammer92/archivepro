@@ -1,0 +1,148 @@
+@import "../../framework/TheProgrammer";
+
+
+//for materializa
+
+
+.edit {
+    border:1px solid #eee;
+    width: 73%;
+
+
+    margin:auto;
+    display: flex;
+   flex-direction: column;
+
+
+
+}
+nav{
+    background-color:unset;
+    box-shadow:none;
+
+}
+
+.editSidebar{
+    width: 100%;
+
+    background-color:white;
+    border:1px solid #eee;
+    margin:0;
+    display:flex;
+
+    justify-content:center;
+
+
+    nav{
+        margin: auto;
+
+
+
+    }
+
+    nav ul {
+
+        display:flex;
+        justify-content:center;
+
+    }
+    nav a li {
+        display: inline;
+        text-decoration: none;
+
+        color:inherit;
+        width: 100%;
+
+
+    }
+
+    nav a{
+
+        width:33.33%;
+        color:rgba(0,0,0 ,0.6);
+        text-align:center;
+        background-color:#f1f2f7;
+
+    }
+
+    nav a:hover{
+
+        cursor:pointer;
+        color:#23527c;
+    }
+    nav .router-link-active{
+        background-color:white;
+        cursor:pointer;
+        transition :background-color .3s;
+
+    }
+}
+
+
+
+
+
+//gestion du main
+
+.editMain{
+    width: 100%;
+    height: 100%;
+    background-color:white;
+    display: flex;
+
+
+}
+
+.editMainForm{
+    margin: auto;
+    width:100%;
+    height:  100%;
+
+    input{
+        height: 2rem;
+    }
+
+    .form-group-TheProgrammer {
+        display:flex;
+        text-align: left;
+
+        flex-wrap: wrap;
+        justify-content:center;
+    }
+    .form-group-TheProgrammer .editMainDivInput{
+        width: 300px;
+
+        margin-left:20px;
+
+        button,input,textarea,select{
+            width: 100%;
+            padding: 0px 10px;
+            border-radius:5px;
+            border:1px solid #eee;
+        }
+        button{
+                width:50%;
+                background-color:#3897f0;
+                border:1px solid #3897f0;
+                color:#fff;
+            padding:2px;
+
+            font-size: 16px;
+
+        }
+        textarea{
+            resize: vertical;
+        }
+
+    }
+    .form-group-TheProgrammer .editMainDivLabel{
+            width: 120px;
+            text-align:right;
+            margin-top: 13px;
+
+
+        }
+
+}
+
+

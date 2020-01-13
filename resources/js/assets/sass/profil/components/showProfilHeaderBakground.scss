@@ -1,0 +1,99 @@
+
+
+.main-first-profil-header{
+
+    background-color:#3e4a59;
+
+    width:100%;
+
+    margin-bottom:45px;
+
+
+
+
+    .main-first-profil-header-text{
+
+        color:white;
+    }
+
+    .push-t{
+
+        margin:30px auto;
+        color:white;
+        flex-direction:column;
+
+
+
+
+
+        .push-t-avatar{
+
+            margin:0 auto 10px auto;
+
+
+            img{
+
+                border-radius: 100px;
+                height:150px;
+                width:150px;
+
+                border:4px solid white;
+            }
+
+        }
+
+        .push-t-text{
+
+         text-align: center;
+
+        }
+
+        .push-t-button{
+            margin:auto;
+            display: flex;
+            justify-content:center
+
+            button {
+
+
+                border-radius:35px;
+            }
+
+            .push-t-button-message{
+
+                background-color:rgba(244, 67, 54, 0.8);
+            }
+
+            .push-t-button-send {
+
+            }
+        }
+    }
+
+    h1{
+        font-size:2.5rem;
+    }
+
+    h1,h2,h3,h4{
+        color:white;
+    }
+
+    .footer-profil-header{
+
+        background-color:white;
+
+        height:60px;
+        width:100%;
+
+        button{
+
+            transform:translateY(25px)
+        }
+
+
+
+    }
+}
+
+
+

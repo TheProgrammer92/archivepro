@@ -1,0 +1,44 @@
+@import "../framework/TheProgrammer";
+
+
+#footer{
+
+    overflow-x: hidden;
+    border-top: 1px solid rgba(47, 46, 45 ,0.2);
+    padding: 10px 20px;
+    width: 100%;
+
+   /* align-items: flex-end;*/
+
+
+
+
+
+}
+
+
+#footer{
+
+    .footer-nav-text-left{
+
+    }
+
+    .footer-nav-text-left, .footer-nav-text-right{
+
+        ul{
+            list-style-type: none;
+        }
+        ul li{
+            color:#3c4858;
+            font-weight: 300;
+            display: inline;
+            margin:0 10px;
+        }
+        ul li a {
+
+
+            color:#3c4858;
+            text-decoration: none;
+        }
+    }
+}

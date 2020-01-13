@@ -1,0 +1,104 @@
+
+//partials global
+@import "../partials/Variable/partialsForAll";
+
+
+//my framework
+@import "../framework/TheProgrammer";
+
+//sidebar, global
+@import '../global/sidebar';
+
+
+
+
+@import '../global/sidebarMenu';
+
+//footer global
+@import '../global/footer';
+
+
+//Variable declaration
+/*
+$police_all:'Roboto',sans-serif;
+*/
+
+
+.container-home{
+
+
+
+    margin:0 auto;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width:calc(100% - 280px);
+    flex-direction:column;
+
+    float:right;
+    padding: 0;
+
+
+
+}
+
+
+.row{
+    margin:0;
+}
+
+a{
+    color:rgba(0,0,0,0.6);
+}
+
+a:hover{
+    text-decoration :none;
+    color:rgba(0,0,0,0.8)
+}
+/*#app::after{
+    content:'';
+    clear: both;
+    display:flex;
+}
+#app {
+
+    height: 100%;
+    position: relative;
+    background-color:gold;
+}*/
+
+#app{
+    height: 100%;
+   /* position:relative;
+    top: 0;*/
+
+}
+/*
+.wrapper::after{
+    content:'';
+    clear: both;
+    display:flex;
+}
+.wrapper {
+
+    position: relative;
+    background-color:gold;
+    height: 100%;
+
+
+
+}
+
+*/
+
+
+.wrapper-router-view{
+
+    height: 100%;
+
+}
+
+@import '../partials/responsive';
+

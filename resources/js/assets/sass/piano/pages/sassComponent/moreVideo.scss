@@ -1,0 +1,29 @@
+
+.afficheRecent{
+
+
+    display: flex;
+    width: 100%;
+
+    flex-direction: column;
+
+    padding:0 15px;
+
+    .card-image{
+
+        img{
+            height: 171px;
+        }
+    }
+
+
+    .card{
+
+        flex-direction:initial;
+    }
+
+
+
+
+
+}

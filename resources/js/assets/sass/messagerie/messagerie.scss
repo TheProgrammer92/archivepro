@@ -1,0 +1,30 @@
+
+.messagerie {
+    position: fixed;
+    right: 50px;
+    bottom:20px;
+    z-index: 10000;
+
+    width: 550px;
+    max-height:500px;
+    min-height: 60px;
+
+    display:flex;
+    justify-content: flex-end;
+    .messagerie-img {
+
+        display:flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+
+    }
+     .col-3 {
+
+        ms-flex: 0 0 25%;
+        flex: 0 0 16%;
+        max-width: 25%
+    }
+
+
+
+}

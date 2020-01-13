@@ -1,0 +1,149 @@
+
+
+@media screen and (max-width: 1510px) {
+
+
+    //responsive pour la parti video
+    .container-vd-piano  {
+        .video{
+            width: 97%  !important;
+
+
+
+            video{
+                height:280px;
+                background-color:transparent;
+            }
+        }
+
+
+    }
+    .listRecent{
+        width: 100%;
+
+        .card.horizontal {
+
+            .card-image{
+
+                width: 25%;
+            }
+        }
+    }
+
+
+
+
+    //responsive pour l'affichage des video recente
+
+  .container-vd-piano {
+        .listRecent {
+            width: 100%;
+            margin: 15px auto;
+
+            height: 400px;
+            overflow-y: scroll;
+
+            .card-video {
+
+                .img-video {
+
+                    width: 20%;
+
+                    img {
+                        width: 100%;
+
+                    }
+                }
+
+                .title-video {
+                    width: 70%;
+                    margin-left: 15px;
+                }
+            }
+        }
+
+
+      .vd-comment{
+
+          width: 100%;
+
+          .card-comment {
+              width:100% !important;
+          }
+
+          .comment {
+              margin: 0 auto;
+
+
+              .card-comment-message{
+
+               margin-left:34px !important;
+              }
+
+              .card-comment-reponse{
+                  margin-left:30px !important;
+              }
+          }
+      }
+
+    }
+
+
+    // responsive pour les commentaire
+
+
+    .contains .container-vd-piano .vd-comment{
+
+        width:100%
+    }
+}
+
+@media (min-width: 873px) {
+
+.contains{
+    width: 620px;
+    float:right;
+}
+
+
+
+
+}
+
+
+
+@media screen and (max-width:1530px){
+
+    .main-piano{
+
+
+    }
+
+    .row-card{
+
+        margin:15px 15px;
+
+        .col-md-4{
+
+            min-width:50%;
+        }
+    }
+
+
+
+}
+
+
+@media screen and (max-width: 1220px){
+
+    .row-card{
+
+        margin:15px 15px;
+
+        .col-md-4{
+
+            min-width:100%;
+        }
+    }
+
+}

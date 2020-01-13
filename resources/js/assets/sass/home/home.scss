@@ -1,0 +1,84 @@
+
+//main for home
+
+
+//main for my recent projet
+
+
+
+body{
+
+    opacity: 5;
+}
+
+.row-main-global {
+
+    padding: 20px;
+}
+.main{
+    height: 200px;
+
+
+
+
+
+    width: 100%;
+
+    font-size: 19px;
+    line-height: 25px;
+
+}
+
+
+.help-show-note {
+
+     background-color:#d8aa46;
+    padding:15px;
+    border-radius: 2px;
+    color:white;
+
+    font-size: 16px;
+
+    span {
+        margin-left: 10px;
+
+    }
+}
+
+.card-show-note {
+        margin:16px 0;
+
+
+    .card-show-btn {
+
+        a {
+
+            color:white;
+            background-color:rgb(231, 76, 60);
+            margin:15px 0;
+
+        }
+
+
+    }
+
+    .card-show-content {
+
+        background-color:white;
+        padding:15px;
+        margin:8px 0;
+
+    }
+
+    .text-code-courier {
+
+        font-weight:300;
+        color:rgb(52, 152, 219);
+
+    }
+
+    .text-name-receptor {
+
+        margin-left: 35px;
+    }
+}

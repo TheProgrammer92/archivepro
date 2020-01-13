@@ -1,0 +1,73 @@
+@import "../framework/TheProgrammer";
+
+#sidebarMenu  {
+
+    position:fixed;
+    right: 0;
+
+    width: 400px;
+
+    z-index: 22;
+
+
+}
+
+ul {
+     padding: 0;
+    list-style-type: none;
+}
+
+.sidebar-list-item{
+    background-color:white;
+    width: 70%;
+    margin-left: 40px;
+    border-radius:15px;
+
+    text-align: center;
+
+
+    }
+.sidebar-list-item{
+    li{
+        margin: 10px 0;
+
+
+}
+li .listAtChange {
+
+    margin-left: 15px;
+}
+li .listAtChange div{
+    display: inline-block;
+    margin:0px 15px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50px;
+
+}
+li .listAtChange div:hover{
+   border:3px solid #3498db;
+
+}
+li .listAtChange div[data-color='red']{
+
+
+    background-color:red;
+}
+li .listAtChange div[data-color='blue']{
+
+
+    background-color:blue;
+}
+li .listAtChange div[data-color='green']{
+
+    background-color:green;
+}
+
+h3{
+    font-weight:400;
+ font-size: 1.2em;
+
+}
+
+}

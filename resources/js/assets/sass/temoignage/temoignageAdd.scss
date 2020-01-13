@@ -1,0 +1,104 @@
+body {
+    background: #eee;
+}
+ .row-add-temoignage {
+
+        margin-top:60px;
+     height:100%;
+
+     .temoignage-add-sidebar {
+
+         position: fixed;
+         height: 100%;
+         width: 280px;
+         background:linear-gradient(to bottom,rgba(118,56,183,.1) 0,rgba(107,55,182,.1) 100%),linear-gradient(-40deg,rgba(114,55,161,0) 82%,#7237a1 88%,#7237a1 94%,rgba(114,55,161,0) 110%),linear-gradient(-60deg,rgba(153,77,207,0) 36%,rgba(153,77,207,.5) 38%,rgba(153,77,207,.5) 40%,rgba(153,77,207,0) 42%),linear-gradient(-60deg,rgba(153,77,207,0) 0,rgba(153,77,207,0) 48%,rgba(153,77,207,.8) 56%,rgba(153,77,207,0) 62%),linear-gradient(34deg,rgba(232,134,232,0) 0,rgba(232,134,232,0) 75%,rgba(232,134,232,.6) 81%,rgba(232,134,232,.6) 83%,rgba(232,134,232,0) 89%),linear-gradient(to right,#302877 0,#4f329c 25%,#7f40cb 61%,#9c55d7 80%,#9e55da 100%);
+
+         float:right;
+
+     }
+
+     .row-form-temoignage {
+
+         background:white;
+         border:1px solid #eee;
+         width:100%;
+         margin:0 auto;
+
+         .form-temoignage-header-text{
+
+             text-align:center;
+             margin:25px auto;
+         }
+
+         .nav-form-temoignage {
+             nav {
+                 background: rgba(200,200,200,.2);
+                 margin:0;
+                 text-align:center;
+                 box-shadow:none;
+                 ul {
+
+                     display: flex;
+                 }
+
+                 a {
+
+                     margin:0;
+                     color:#555;
+                     width:33.33%;
+                     text-align:center;
+
+
+                 }
+
+                 a.router-link-active-reupdate {
+
+                     background-color: #e91e63;
+                     box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(233,30,99,.4);
+                     color:white;
+                 }
+                 li {
+                     width:100%;
+                 }
+             }
+         }
+     }
+
+
+     .info-perso-temoignage {
+         margin-top: 50px;
+         width:100%;
+
+         .profil {
+             img {
+                 border-radius: 55px;
+             }
+         }
+
+         .form {
+
+             margin-bottom:50px;
+             margin-top: 15px;
+         }
+     }
+ }
+
+ input, select, textarea {
+
+     color:#515150;
+ }
+
+nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+
+    height: 0;
+    font-size: 34px;
+}
+
+
+
+
+//responsive
+
+
+
+

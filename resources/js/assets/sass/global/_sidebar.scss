@@ -1,0 +1,251 @@
+
+@import "../framework/TheProgrammer";
+// sidebar  , The left part
+
+//variable
+
+$liensColorWhite: white;
+$liensColorBlack: #707070;
+$hoverColorLiens: unset ; /*#212529*/
+
+$liensColor:$liensColorWhite;
+$colorYelllow :#d8aa46;
+$sidebarColorRed:rgba(244,67,54,0.8);
+$sidebarColorWhite: rgba(240,241,244,1);
+$sidebarColorBlack:rgba(5,2,0,.8);
+
+@mixin sidebarMixin($hauteur) {
+
+    padding:0;
+    border:none;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    width:280px;
+    position: fixed;
+    top:0px;
+    left: 0;
+    height: $hauteur;
+   /* color:$liensColorWhite;*/
+    color:#2a323c;
+    transition: 0.05s ease-in;
+    /*
+    box-shadow: 0 16px 38px -12px rgba(0,0,0,.56), 0 4px 25px 0 rgba(0,0,0,.12), 0 8px 10px -5px rgba(0,0,0,.2);
+    */
+    z-index: 6000;
+    display:flex;
+    flex-direction:column;
+    align-items:start;
+    float:left;
+
+
+
+}
+
+.sidebar-image{
+
+    @include sidebarMixin(80%);
+
+
+
+   /* background:url(https://theprogrammer-pro.local/images/images/snow.jpg) center center /cover;*/
+
+}
+
+.sidebar{
+
+    //The sidebar image
+    @include sidebarMixin(100%);
+
+
+   /* background-color:$sidebarColorRed*/
+    background-color: white;
+
+
+
+
+}
+
+
+
+.sidebar{
+
+
+    .sidebar-header-first {
+
+        background-color:rgb(236, 240, 241);
+        width:100%;
+
+    }
+    i.menu-sidebar{
+
+        color:$colorGreen;
+
+
+    }
+
+    nav {
+
+        box-shadow: none;
+        background-color: unset;
+    }
+    nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+        display: unset;
+        font-size: 15px;
+        height: 56px;
+        line-height: 56px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    nav a.router-link-active{
+
+        color:$colorYelllow;
+
+        box-shadow:none;
+    }
+
+
+
+    //The sidebar content
+    .div_close_sidebar{
+        padding:15px;
+        img{
+
+        }
+    }
+
+    hr{
+        height: 1px;
+    }
+
+    .sidebar_search{
+
+        background-color:white;
+
+        input{
+
+            width: 100%;
+            padding:25px 15px;
+            border:1px solid white;
+        }
+
+    }
+    .sidebar-header{
+
+        width: 100%;
+}
+
+
+    .sidebar-header-logo,.sidebar-header-title{
+
+        position: relative;
+        padding:15px 0;
+    }
+
+    //siderbar for the logo
+    .sidebar-header-logo{
+        display: flex;
+        margin:auto;
+        flex-direction: column;
+
+        width:100%;
+    }
+
+
+    .sidebar-header-logo{
+        img {
+            margin:auto;
+
+
+        }
+        div{
+            margin:10px auto;
+            font-size: 25px;
+            color:inherit;
+        }
+    }
+
+    //sidebar  just inside , for the profil of users
+    .sidebar-header-title{
+        display: flex;
+        margin:auto;
+        flex-direction: column;
+
+        width:100%;
+
+    }
+
+    .sidebar-header-title{
+        img {
+            margin:auto;
+            border-radius: 60px;
+        }
+        div{
+            margin:10px auto;
+            color:inherit;
+            font-size:20px;
+        }
+    }
+
+    nav a{
+        color:unset;
+    }
+
+    .sidebar-nav{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1em;
+        width:100%;
+    }
+    .sidebar-nav a{
+
+        text-decoration:none;
+    /*    color:rgba(222, 219, 214,1);*/
+
+          color:#2a323c;
+        padding-left: 15px;
+        transition: all .3s;
+
+    }
+  /*  .sidebar-nav a::before{
+
+        content:'';
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+        margin-right: 20px;
+      background: url('https://theprogrammer-pro.local/images/icone/home5.png') center center /contain;
+    }*/
+
+    .sidebar-nav a:active, .sidebar-nav a:hover{
+       /* color:$hoverColorLiens;*/
+
+
+
+        background-color:rgba(242, 240, 236,0.5);
+    }
+
+
+    //replace sidebar when responsive
+
+    .sidebar-header-replace {
+        display: none;
+
+        ul {
+            padding: 0;
+        }
+        ul li{
+
+            margin:15px 0;
+        }
+        input[type=search] {
+
+        }
+
+    }
+
+    .sidebar-header-replace-notify{
+        display: none;
+    }
+}

@@ -1,0 +1,223 @@
+@import "../framework/TheProgrammer";
+
+/*animate*/
+
+.animated.delay-1s{
+    animation-delay:.055s
+}
+
+.header-principal{
+   width: 100%;
+
+    height: 50px;
+   /* background:linear-gradient(to right, #f62d51 0%, #660fb5 100%);*/
+   /* background-color: rgba(5,2,0,.8);*/
+    /*background-color:rgba(244,67,54,0.8);*/
+    background-color:rgb(236, 240, 241);  //#f0f1f4
+    position:sticky;
+    top:0;
+    bottom: 0;
+    right:0;
+    z-index: 5000;
+    box-shadow: inset 0px 4px 8px -3px rgba(17, 17, 17, .06);
+    /*border-bottom: 1px solid #eee;*/
+    padding:0px 10px;
+
+
+}
+.header-content-left{
+
+    display:flex;
+    align-items: center;
+
+
+    width: 20%;
+    height:100%;
+    img{
+        border-radius:35px;
+        margin-left:15px;
+        height:1.8rem;
+
+    }
+}
+
+
+.header-principal{
+
+
+   .header-content-right{
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: flex-end;
+       align-items: center;
+
+       height: 100%;
+
+       i{
+           cursor:pointer;
+       }
+       i.medium{
+           font-size: 1.8rem;
+
+       }
+
+       i.small{
+            font-size:3rem;
+           transform: translateY(10px);
+           color:#777;
+       }
+
+
+
+       .header-img-search{
+
+
+       }
+
+        ul{
+            list-style-type: none;
+
+
+
+        }
+
+       .header-content-right-ul{
+
+           display: flex;
+
+
+       }
+       .header-content-right-ul li{
+
+           margin:0 15px;
+       }
+
+       .card-header-profil{
+           width: 90%;
+
+           margin:15px auto;
+           display: flex;
+           word-wrap: break-word;
+       }
+
+
+
+   }
+
+    .img-other-header{
+        transform: translateY(10px);
+
+    }
+    /*The form search*/
+
+
+
+
+    .header-active-profil{
+        border-radius: 50px;
+    }
+
+
+
+
+
+    .header-content-ul-list-profil{
+        position:absolute;
+        width: 300px;
+        right: 10px;
+        background-color:white;
+        z-index: 5;
+        box-sizing: border-box;
+        margin-top: 15px;
+
+
+}
+
+    .header-content-ul-list-profil{
+
+        div:nth-child(2){
+            margin-left: 10px;
+        }
+        .header-profil{
+            border-radius: 7px;
+        }
+        .header-name{
+
+            font-size: 1em;
+        }
+        .header-email{
+            font-size: 0.7em;
+            font-weight: 300;
+        }
+        .header-btn-view-profil{
+
+            padding:10px;
+            border-radius: 20px;
+            background-color:rgb(255, 118, 118);
+            color:white;
+            border:none;
+            cursor:pointer;
+        }
+        .header-btn-view-profil a{
+            text-decoration: none;
+            color:white;
+        }
+        hr{
+            background-color:rgba(248, 242, 238,0.3);
+            color:rgba(248, 242, 238,0.3);
+            height: 1px;
+
+        }
+
+
+
+
+        //petit popup du clic pour profil
+        .card-body-profil{
+            width: 100%;
+            padding-bottom:15px;
+
+        }
+
+        .card-body-profil{
+            ul{
+                padding-left: 0;
+            }
+            ul a{
+                text-decoration: none;
+                color:$colorBlack;
+            }
+            ul li{
+                margin-top:18px;
+            }
+            ul li span{
+                margin-right:10px;
+            }
+        }
+
+    }
+
+
+
+    // image pour la responsive
+    .header-replace-right{
+
+        display: none;
+
+        justify-content: flex-end;
+        width: 20%;
+        height: 100%;
+        align-items: center;
+        margin:0;
+
+
+
+        img{
+
+            margin-right: 15px;
+        }
+
+    }
+
+}
+

@@ -1,0 +1,58 @@
+.msg-show-conversation{
+    background-image:url('../../../../../../public/images/images/snow2.jpg');
+    background-size:cover;
+    height: 372px;
+    overflow:auto;
+    padding:18px;
+    transform: scale(1, -1);
+
+    ul {
+        width:100%;
+        padding: 0px;
+        margin-bottom:10px;
+        transform: scale(1, -1);
+
+
+    }
+
+    .msg-show {
+        max-width:75%;
+        display: flex;
+        align-items:start;
+
+
+
+    }
+    .msg-show-left{
+        img {
+            border-radius:8px;
+        }
+           div:nth-child(2) {
+               background: white;
+               border-radius:5px;
+               border:1px solid white;
+               margin-left:5px;
+               text-align:left;
+               padding:8px 35px 8px 10px;
+
+
+           }
+    }
+
+    .msg-show-right{
+        img {
+            border-radius:8px;
+        }
+
+        div:nth-child(2) {
+            background:     #5cb45b;
+            border-radius:5px;
+            border:1px solid  #5cb45b;
+            margin-left:5px;
+            text-align:left;
+            color:white;
+            padding:8px 35px 8px 10px;
+
+        }
+    }
+}

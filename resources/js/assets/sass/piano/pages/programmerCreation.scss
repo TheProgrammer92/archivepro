@@ -1,0 +1,39 @@
+@mixin div_video() {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+@mixin videoAndComment(){
+
+    width: 80%;
+}
+.container-vd-piano{
+
+
+    max-width: 1500px;
+    margin: 25px auto;
+
+    display: flex;
+    flex-wrap: wrap;
+
+
+
+}
+
+
+
+
+
+
+
+
+@import "../responsivePiano";
+
+
+
+
+
+

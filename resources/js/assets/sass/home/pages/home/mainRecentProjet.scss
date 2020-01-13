@@ -1,0 +1,90 @@
+.recentProjet{
+
+    z-index: 10;
+
+    width: 100%;
+    height: auto;
+    display: flex;
+
+    justify-content:space-between;
+    color:white;
+    transform:translateY(-90px);
+
+    .row{
+        margin: 0 auto;
+    }
+}
+
+//gestion du header
+.recent-header{
+
+    padding:50px 25px 30px 10px;
+    background-color:#eb7475;
+    margin: 15px auto;
+
+
+    .recent-header-size{
+        text-align: right;
+
+
+    }
+
+}
+
+.recent-header.recent-one{
+
+    background: #3f9ce8;
+}
+
+
+.recent-header.recent-two{
+
+    background:#6eab4d;
+}
+
+.recent-header.recent-three{
+
+    background:#d262e3;
+}
+
+.recent-header.recent-four{
+
+    background:#2facb2;
+}
+
+.col-6 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 45%;
+    max-width: 50%;
+}
+@media (min-width: 768px){
+    .col-md-6 {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 48%;
+    }
+
+}
+
+@media (min-width: 1200px){
+
+    .col-xl-2 {
+
+        flex:   0 0 23.66%;
+        width:16%;
+
+
+    }
+}
+
+@media (min-width: 992px){
+
+  .col-lg-2 {
+
+      flex: 0 0 22.666667%;
+      max-width: 23.666667%;
+  }
+
+
+}
+

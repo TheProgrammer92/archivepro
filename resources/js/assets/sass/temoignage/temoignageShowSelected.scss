@@ -1,0 +1,58 @@
+.show-selected {
+
+    background:rgb(30, 50, 117);
+    position:absolute;
+    top:0;
+
+    width: 100%;
+    z-index: 5000;
+    height:calc(100% + 100vh);
+    animation:tada 1s alternate;
+
+
+
+    .header-show-selected {
+
+        width:100%;
+        position:sticky;
+        background-color: rgb(72, 179, 226);
+        height:70px;
+        margin-bottom:50px;
+    }
+
+    .row-affiche-selected {
+
+        background:white;
+        width:80%;
+        min-height:400px;
+        margin:auto;
+
+        .profil-img{
+
+
+            border:1px solid #eee;
+            padding:0;
+
+
+
+
+            img {
+                width:100%;
+                height:150px;
+                transform: translateY(-50px);
+
+            }
+        }
+        .selected-info {
+
+            flex-direction: column;
+
+            .text-temoignage {
+
+                margin-top:50px;
+                width:80%;
+
+            }
+        }
+    }
+}

@@ -1,0 +1,117 @@
+//partials global
+@import "partials/Variable/partialsForAll";
+
+
+//my framework
+@import "framework/TheProgrammer";
+
+
+
+$bodyColor:#212529;
+$bodyBackgroundColor:rgb(236, 240, 241); //#fafafa
+html {
+    height: 100%;
+}
+body{
+
+    margin: 0;
+    padding: 0;
+    background:url(https://courierpro.local/images/images/logo2.png) center center /cover ;
+    font-size: 1em;
+    overflow-x: hidden;
+    /*background:$bodyBackgroundColor;*/
+    color:$bodyColor;
+
+    min-height: 100%;
+    font-family: 'Rubik',sans-serif;
+    font-weight: 300;
+
+
+
+
+}
+h1,h2,h3,h4,h5,h6{
+    color:rgba(0,0,0,0.7);
+
+    font-weight:300;
+
+    /*    font-family: 'Open sans', sans-serif;*/
+
+
+}
+
+h1{
+    font-size:1.5rem;
+
+}
+h2{
+    font-size:1.3em;
+
+
+}
+h3{
+    font-size:1em;
+
+
+}
+
+
+
+// for materialize icons
+
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+
+
+//for scrool bar
+
+
+/*
+html
+{
+    scrollbar-face-color: black;
+    scrollbar-shadow-color: black;
+    scrollbar-highlight-color: black;
+    scrollbar-3dlight-color: black;
+    scrollbar-darkshadow-color: black;
+    scrollbar-track-color: black;
+    scrollbar-arrow-color: black;
+}
+
+::-webkit-scrollbar
+
+{
+
+    width: 13px;
+
+    margin-right: 3px;
+
+}
+
+::-webkit-scrollbar-track
+
+{
+
+    -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,1);
+
+    border-radius: 10px;
+
+}
+
+::-webkit-scrollbar-thumb
+
+{
+
+    border-radius: 10px;
+
+
+
+    background-color:  rgba(0,0,0,0.4);
+
+}
+
+*/

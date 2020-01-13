@@ -1,0 +1,67 @@
+
+#openRetrait {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    box-shadow: none;
+    min-height: 548px !important;
+    height: unset;
+    width:517px;
+}
+
+.modal {
+    width: 517px  ;
+    padding: 0;
+
+}
+.delive-global-courrier {
+    border: 1px solid #7f8c8d;
+    -webkit-box-shadow: 0px 0px 10px #bdc3c7;
+    box-shadow: 0px 0px 10px #bdc3c7;
+    color: white;
+    position: absolute;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 400px;
+    background-color: rgba(250, 250, 250, 0.6);
+    width: 500px;
+    /* height: 100%; */
+    background: white;
+    padding-top: 15px;
+    margin: auto;
+
+
+    .delive-info {
+        padding: 15px  35px;
+    }
+    .label-expeditor {
+
+        color:#3498db
+
+    }
+
+    .label-name-expeditor {
+
+        color:#333333;
+    }
+
+    .btn-delive {
+        background-color:rgb(46, 204, 113);
+    }
+
+    .btn-nothing {
+        background-color:#e74c3c;
+    }
+
+}
+
+.modal {
+
+    width:450px;
+    padding:0;
+    height:500px;
+}
