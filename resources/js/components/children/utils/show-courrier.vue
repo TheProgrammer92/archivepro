@@ -2,20 +2,20 @@
     <b-row class="card-show-note"  >
 
 
-        <b-row class="w-100 card-show-btn" v-if="isShowBtnDate">
+        <b-row class="w-100 card-show-btn" v-for="(categorie, index) in tabCategorie" :key="index">
 
-            <a class="waves-effect waves-light btn"> Aujourd'hui</a>
-        </b-row>
+            <a class="waves-effect waves-light btn"> {{categorie.nom}}</a>
 
 
-        <b-row class="card-show w-100" v-for="(value,cle) in tabCourrier" :key="cle">
+
+        <b-row class="card-show w-100" v-for="(value,cle) in tabSearch" v-if="value.id_cat===categorie.id" :key="cle">
 
             <!--      <b-row class="w-100 card-show-btn" v-if="getDate(value,cle)">
 
                       <a class="waves-effect waves-light btn"> {{ valueBtnDate[cle] }}</a>
                   </b-row>-->
 
-            <affiche-delivered-courrier v-if="isShowDeliveCourrier" :tabInfoCourrierDelive="value" ></affiche-delivered-courrier>
+            <!--<affiche-delivered-courrier v-if="isShowDeliveCourrier" :tabInfoCourrierDelive="value" ></affiche-delivered-courrier>-->
 
             <b-row class="card-show-content w-100">
 
@@ -27,12 +27,11 @@
                         <span ></span>
                     </label>
 
-                    <span> <span class="text-code-courier"> Code: {{value.code}}</span>
-                    <span class="text-name-receptor">Courier de <strong>{{tabExpeditorCourrier[cle].name}}</strong>
+                    <span> <span class="text-code-courier"> Code: {{value.nom}}</span>
+                    <span class="text-name-receptor">Archive de <strong>{{value.nom}}</strong>
                     </span>
 
-                    <span class="text-name-receptor">Courier pour <strong>{{value.type}}</strong>
-                    </span>
+                    <!--<span class="text-name-receptor">Courier pour <strong>{{value.type}}</strong></span>-->
                 </span>
                 </b-row>
 
@@ -52,7 +51,7 @@
 
 
         </b-row>
-
+        </b-row>
     </b-row>
 </template>
 
@@ -63,7 +62,8 @@
 
         props: {
 
-            tabCourrier:Array,
+            tabSearch:Array,
+            tabCategorie:Array,
             tabExpeditorCourrier:Array,
             isShowBtnDate:Boolean,
 
@@ -112,6 +112,13 @@
 
             }
 
+        },
+
+        updated() {
+            console.log("mounted comp")
+
+            console.log(this.tabCategorie);
+            console.log(this.tabSearch)
         }
 
     }

@@ -37,7 +37,7 @@
 
 
 
-            <show-courriel-search :tabSearchCourrier="tabSearchCourrier" :tabExpeditorCourrier="tabExpeditorCourrier"></show-courriel-search>
+            <show-courriel-search :tabSearch="tabSearchArchive" :tabCategorie="tabSearchCategorie" ></show-courriel-search>
 
         </b-row>
 
@@ -55,8 +55,9 @@
             return {
                 search: '',
 
-                tabSearchCourrier:[],
-                tabExpeditorCourrier:[],
+                tabSearchArchive:[],
+                tabSearchCategorie:[],
+
                 element: {},
                 countResultSearch:0,
                 isShowOperate:false,
@@ -89,12 +90,14 @@
                     search:app.search
                 };
 
-                axios.post("courrier/searchCourrier",this.element)
+                axios.post("archive/search",this.element)
                     .then(e => {
 
-                        app.tabSearchCourrier = e.data.tabSearchCourrier;
-                        app.countResultSearch=app.tabSearchCourrier.length;
-                        app.tabExpeditorCourrier= e.data.tabExpeditorCourrier;
+                        app.tabSearchArchive = e.data.archive;
+                        app.tabSearchCategorie = e.data.categorie;
+                        app.countResultSearch=app.tabSearchArchive.length;
+
+
 
                         console.log(e.data)
 
@@ -103,7 +106,7 @@
                     .catch(e => {
 
 
-                        console.log(e.response)
+                        console.log(e)
                         console.log("search error")
                     })
             },

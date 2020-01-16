@@ -23,11 +23,11 @@
                         <router-link to="/" ><i class="small material-icons">home</i>Accueil</router-link>
                         <router-link :to="{ name: 'nouveau' }"  v-if="$auth.check(2) || $auth.check(1)  " >
                             <i class="large material-icons">insert_chart</i>
-                            Nouveau Courriel </router-link>
+                            Nouvel archive </router-link>
 
                         <router-link :to="{ name: 'delivered' }"  v-if="$auth.check(2) || $auth.check(1)  || $auth.check(3)" >
                             <i class="large material-icons">insert_chart</i>
-                            Retrait Courriel</router-link>
+                            Retrait archive</router-link>
 
 
                             <a class="modal-trigger" href="#modal1" >

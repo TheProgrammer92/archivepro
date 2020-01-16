@@ -1,5 +1,5 @@
 <template>
-    <show-courrier :tabCourrier="tabSearchCourrier"  :tabExpeditorCourrier="tabExpeditorCourrier" :isShowBtnDate="false"></show-courrier>
+    <show-courrier :tabSearch="tabSearch" :tabCategorie="tabCategorie"  :isShowBtnDate="false"></show-courrier>
 </template>
 
 <script>
@@ -9,8 +9,9 @@
 
         props: {
 
-            tabSearchCourrier:Array,
-            tabExpeditorCourrier:Array,
+            tabSearch:Array,
+            tabCategorie:Array
+
 
         },
         components: { showCourrier},
@@ -26,41 +27,6 @@
 
 
             }
-        },
-
-        mounted() {
-
-            let app = this;
-            axios.get('courrier/getAllCourrier')
-                .then(e => {
-
-                    let a =2;
-                    app.tabCourrier = e.data.courrier;
-                    let tab_expediteur = e.data.expediteur;
-                    let tab_destinataire = e.data.destinataire;
-
-
-                    let i=0;
-                    app.tabCourrier.forEach(function (element) {
-
-                        element.code= tab_destinataire[i].code;
-                        element.avatar= tab_destinataire[i].avatar;
-                        element.name= tab_destinataire[i].name;
-
-                        i++;
-
-
-                    })
-
-
-
-
-
-                })
-                .catch(res => {
-                    console.log(res.response)
-
-                })
         },
 
         methods: {
@@ -91,6 +57,14 @@
 
 
             }
+        },
+
+        updated() {
+
+            // console.log("des categ")
+            //
+            // console.log(this.tabSearch)
+            // console.log(this.tabCategorie)
         }
     }
 

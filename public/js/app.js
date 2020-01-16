@@ -76884,7 +76884,7 @@ var render = function() {
                   _c("i", { staticClass: "large material-icons" }, [
                     _vm._v("insert_chart")
                   ]),
-                  _vm._v("\n                    Nouveau Courriel ")
+                  _vm._v("\n                    Nouvel archive ")
                 ])
               : _vm._e(),
             _vm._v(" "),
@@ -76893,7 +76893,7 @@ var render = function() {
                   _c("i", { staticClass: "large material-icons" }, [
                     _vm._v("insert_chart")
                   ]),
-                  _vm._v("\n                    Retrait Courriel")
+                  _vm._v("\n                    Retrait archive")
                 ])
               : _vm._e(),
             _vm._v(" "),
@@ -77192,6 +77192,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -77213,7 +77215,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         return {
 
-            tabCourrier: [],
+            tabArchive: [],
+            tabCategorie: [],
             valueBtnDate: [],
             count: 0,
             tab_expediteur: [],
@@ -77236,21 +77239,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
 
         var app = this;
-        axios.get('courrier/getAllCourrier').then(function (e) {
+        axios.get('archive/getAll').then(function (e) {
 
-            app.tabCourrier = e.data.courrier;
-            app.tab_expediteur = e.data.expediteur;
-            app.tab_destinataire = e.data.destinataire;
-
-            var i = 0;
-            app.tabCourrier.forEach(function (element) {
-
-                element.code = tab_destinataire[i].code;
-                element.avatar = tab_destinataire[i].avatar;
-                element.name = tab_destinataire[i].name;
-
-                i++;
-            });
+            app.tabArchive = e.data.archive;
+            app.tabCategorie = e.data.categorie;
         }).catch(function (res) {
             console.log(res.response);
         });
@@ -80725,7 +80717,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -80733,7 +80724,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     props: {
 
-        tabCourrier: Array,
+        tabSearch: Array,
+        tabCategorie: Array,
         tabExpeditorCourrier: Array,
         isShowBtnDate: Boolean
 
@@ -80776,8 +80768,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$parent.$parent.setTabOperate(tabOperateCourriel);
         }
 
-    }
+    },
 
+    updated: function updated() {
+        console.log("mounted comp");
+
+        console.log(this.tabCategorie);
+        console.log(this.tabSearch);
+    }
 });
 
 /***/ }),
@@ -81149,120 +81147,111 @@ var render = function() {
   return _c(
     "b-row",
     { staticClass: "card-show-note" },
-    [
-      _vm.isShowBtnDate
-        ? _c("b-row", { staticClass: "w-100 card-show-btn" }, [
-            _c("a", { staticClass: "waves-effect waves-light btn" }, [
-              _vm._v(" Aujourd'hui")
-            ])
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm._l(_vm.tabCourrier, function(value, cle) {
-        return _c(
-          "b-row",
-          { key: cle, staticClass: "card-show w-100" },
-          [
-            _vm.isShowDeliveCourrier
-              ? _c("affiche-delivered-courrier", {
-                  attrs: { tabInfoCourrierDelive: value }
-                })
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "b-row",
-              { staticClass: "card-show-content w-100" },
-              [
-                _c("b-row", { staticClass: "w-50" }, [
-                  _c("label", [
-                    _c("input", {
-                      staticClass: "filled-in",
-                      attrs: { type: "checkbox" },
-                      domProps: {
-                        checked: value.delivered === 1 ? "checked" : ""
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span")
-                  ]),
-                  _vm._v(" "),
-                  _c("span", [
-                    _c("span", { staticClass: "text-code-courier" }, [
-                      _vm._v(" Code: " + _vm._s(value.code))
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "text-name-receptor" }, [
-                      _vm._v("Courier de "),
-                      _c("strong", [
-                        _vm._v(_vm._s(_vm.tabExpeditorCourrier[cle].name))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "text-name-receptor" }, [
-                      _vm._v("Courier pour "),
-                      _c("strong", [_vm._v(_vm._s(value.type))])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
+    _vm._l(_vm.tabCategorie, function(categorie, index) {
+      return _c(
+        "b-row",
+        { key: index, staticClass: "w-100 card-show-btn" },
+        [
+          _c("a", { staticClass: "waves-effect waves-light btn" }, [
+            _vm._v(" " + _vm._s(categorie.nom))
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.tabSearch, function(value, cle) {
+            return value.id_cat === categorie.id
+              ? _c(
                   "b-row",
-                  {
-                    staticClass: "w-50 btn-operate",
-                    attrs: { "align-h": "end" }
-                  },
+                  { key: cle, staticClass: "card-show w-100" },
                   [
                     _c(
-                      "a",
-                      {
-                        staticClass:
-                          "btn-floating btn-small waves-effect waves-light red"
-                      },
+                      "b-row",
+                      { staticClass: "card-show-content w-100" },
                       [
-                        _c(
-                          "i",
-                          {
-                            staticClass: "material-icons",
-                            on: {
-                              click: function($event) {
-                                $event.preventDefault()
-                                _vm.showOperateCourriel(value)
+                        _c("b-row", { staticClass: "w-50" }, [
+                          _c("label", [
+                            _c("input", {
+                              staticClass: "filled-in",
+                              attrs: { type: "checkbox" },
+                              domProps: {
+                                checked: value.delivered === 1 ? "checked" : ""
                               }
-                            }
+                            }),
+                            _vm._v(" "),
+                            _c("span")
+                          ]),
+                          _vm._v(" "),
+                          _c("span", [
+                            _c("span", { staticClass: "text-code-courier" }, [
+                              _vm._v(" Code: " + _vm._s(value.nom))
+                            ]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "text-name-receptor" }, [
+                              _vm._v("Archive de "),
+                              _c("strong", [_vm._v(_vm._s(value.nom))])
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "b-row",
+                          {
+                            staticClass: "w-50 btn-operate",
+                            attrs: { "align-h": "end" }
                           },
-                          [_vm._v("build\n                ")]
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn-floating btn-small waves-effect waves-light red"
+                              },
+                              [
+                                _c(
+                                  "i",
+                                  {
+                                    staticClass: "material-icons",
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        _vm.showOperateCourriel(value)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("build\n                ")]
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "btn-floating btn-small waves-effect waves-light red",
+                                attrs: {
+                                  "data-dismiss": "modal",
+                                  "data-toggle": "modal",
+                                  "data-target": "#modalUpdate"
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "material-icons" }, [
+                                  _vm._v("add")
+                                ])
+                              ]
+                            )
+                          ]
                         )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "btn-floating btn-small waves-effect waves-light red",
-                        attrs: {
-                          "data-dismiss": "modal",
-                          "data-toggle": "modal",
-                          "data-target": "#modalUpdate"
-                        }
-                      },
-                      [
-                        _c("i", { staticClass: "material-icons" }, [
-                          _vm._v("add")
-                        ])
-                      ]
+                      ],
+                      1
                     )
-                  ]
+                  ],
+                  1
                 )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      })
-    ],
-    2
+              : _vm._e()
+          })
+        ],
+        2
+      )
+    })
   )
 }
 var staticRenderFns = []
@@ -81361,7 +81350,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -81408,13 +81397,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
 
         return {
 
-            tabCourrier: [],
+            tabArchive: [],
             valueBtnDate: [],
             count: 0
 
@@ -81423,21 +81413,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
 
         var app = this;
-        axios.get('courrier/getAllCourrier').then(function (e) {
+        axios.get('archive/getAll').then(function (e) {
 
-            app.tabCourrier = e.data.courrier;
-            var tab_expediteur = e.data.expediteur;
-            var tab_destinataire = e.data.destinataire;
-
-            var i = 0;
-            app.tabCourrier.forEach(function (element) {
-
-                element.code = tab_destinataire[i].code;
-                element.avatar = tab_destinataire[i].avatar;
-                element.name = tab_destinataire[i].name;
-
-                i++;
-            });
+            app.tabArchive = e.data.archive;
         }).catch(function (res) {
             console.log(res.response);
         });
@@ -81482,10 +81460,14 @@ var render = function() {
       _c("b-row", { staticClass: "w-100 card-show-btn" }, [
         _c("a", { staticClass: "waves-effect waves-light btn" }, [
           _vm._v(" Aujourd'hui")
+        ]),
+        _vm._v(" "),
+        _c("a", { staticClass: "waves-effect waves-light btn" }, [
+          _vm._v(" Demain")
         ])
       ]),
       _vm._v(" "),
-      _vm._l(_vm.tabCourrier, function(value, cle) {
+      _vm._l(_vm.tabArchive, function(value, cle) {
         return _c(
           "b-row",
           { key: cle, staticClass: "card-show w-100" },
@@ -81499,16 +81481,16 @@ var render = function() {
               _vm._v(" "),
               _c("span", [
                 _c("span", { staticClass: "text-code-courier" }, [
-                  _vm._v(" Code: " + _vm._s(value.code))
+                  _vm._v(" Code: " + _vm._s(value.id))
                 ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "text-name-receptor" }, [
-                  _vm._v("Courier pour "),
-                  _c("strong", [_vm._v(_vm._s(value.name))])
+                  _vm._v("Archive pour "),
+                  _c("strong", [_vm._v(_vm._s(value.nom))])
                 ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "text-name-receptor" }, [
-                  _vm._v("Courier pour "),
+                  _vm._v("Date pour "),
                   _c("strong", [_vm._v(_vm._s(value.updated_at))])
                 ])
               ])
@@ -81819,31 +81801,34 @@ var render = function() {
     "b-row",
     { staticClass: "row-main-global w-100", attrs: { "align-h": "center" } },
     [
-      _c(
-        "main",
-        { staticClass: "main" },
-        [
-          _c("b-row", { staticClass: "help-show-note" }, [
-            _c("i", { staticClass: "material-icons Medium" }, [
-              _vm._v("add_circle_outline")
+      _c("router-link", { attrs: { to: "/nouveau" } }, [
+        _c(
+          "main",
+          { staticClass: "main" },
+          [
+            _c("b-row", { staticClass: "help-show-note" }, [
+              _c("i", { staticClass: "material-icons Medium" }, [
+                _vm._v("add_circle_outline")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-add-he" }, [
+                _vm._v("     Cliquer ici pour Ajouter une archive")
+              ])
             ]),
             _vm._v(" "),
-            _c("span", { staticClass: "text-add-he" }, [
-              _vm._v("     Cliquer ici pour Ajouter une note")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("show-courrier", {
-            attrs: {
-              "tab-courrier": _vm.tabCourrier,
-              "tab-expeditor-courrier": _vm.tab_expediteur,
-              "is-show-btn-date": true
-            }
-          })
-        ],
-        1
-      )
-    ]
+            _c("show-courrier", {
+              attrs: {
+                "tab-search": _vm.tabArchive,
+                "tab-categorie": _vm.tabCategorie,
+                "is-show-btn-date": true
+              }
+            })
+          ],
+          1
+        )
+      ])
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -84378,141 +84363,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "modal fade",
-      attrs: {
-        id: "modalNotify",
-        tabindex: "-1",
-        role: "dialog",
-        "aria-labelledby": "exampleModalCenterTitle",
-        "aria-hidden": "true"
-      }
-    },
-    [
-      _c(
-        "div",
-        {
-          staticClass: "modal-dialog modal-dialog-centered",
-          attrs: { role: "document" }
-        },
-        [
-          _c("div", { staticClass: "modal-content" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "modal-body" },
-              [
-                _vm._l(_vm.tabCourrier, function(element, index) {
-                  return _vm.tabCourrier.length > 0
-                    ? _c("ul", { staticClass: "collection" }, [
-                        _c("li", { staticClass: "collection-item avatar" }, [
-                          _c("i", { staticClass: "material-icons circle" }, [
-                            _vm._v("folder")
-                          ]),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "title" }, [
-                            _vm._v(
-                              "De : " + _vm._s(_vm.tabExpeditor[index].name)
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("p", [
-                            _vm._v(_vm._s(element.type)),
-                            _c("br"),
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(_vm.tabExpeditor[index].email) +
-                                "\n                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(1, true)
-                        ])
-                      ])
-                    : _vm._e()
-                }),
-                _vm._v(" "),
-                _vm.tabCourrier.length < 1
-                  ? _c("ul", { staticClass: "collection" }, [
-                      _c(
-                        "h3",
-                        {
-                          staticStyle: {
-                            color: "#3498db",
-                            border: "none",
-                            "text-align": "center"
-                          }
-                        },
-                        [_vm._v("Pas de notification Pour le moment")]
-                      )
-                    ])
-                  : _vm._e()
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _vm._m(2)
-          ])
-        ]
-      )
-    ]
-  )
+  return _c("div", {
+    staticClass: "modal fade",
+    attrs: {
+      id: "modalNotify",
+      tabindex: "-1",
+      role: "dialog",
+      "aria-labelledby": "exampleModalCenterTitle",
+      "aria-hidden": "true"
+    }
+  })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLongTitle" } },
-        [_vm._v("Zone De Notification")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "secondary-content", attrs: { href: "#!" } },
-      [_c("i", { staticClass: "material-icons" }, [_vm._v("grade")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -91735,7 +91597,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         $(function () {
 
-            $('body').css('background', 'url(https://courierpro.local/images/images/logo4.jpg) center center /cover  ');
+            $('body').css('background', 'url(/images/images/logo4.jpg) center center /cover  ');
         });
 
         next();
@@ -94098,8 +93960,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             search: '',
 
-            tabSearchCourrier: [],
-            tabExpeditorCourrier: [],
+            tabSearchArchive: [],
+            tabSearchCategorie: [],
+
             element: {},
             countResultSearch: 0,
             isShowOperate: false,
@@ -94128,16 +93991,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 search: app.search
             };
 
-            axios.post("courrier/searchCourrier", this.element).then(function (e) {
+            axios.post("archive/search", this.element).then(function (e) {
 
-                app.tabSearchCourrier = e.data.tabSearchCourrier;
-                app.countResultSearch = app.tabSearchCourrier.length;
-                app.tabExpeditorCourrier = e.data.tabExpeditorCourrier;
+                app.tabSearchArchive = e.data.archive;
+                app.tabSearchCategorie = e.data.categorie;
+                app.countResultSearch = app.tabSearchArchive.length;
 
                 console.log(e.data);
             }).catch(function (e) {
 
-                console.log(e.response);
+                console.log(e);
                 console.log("search error");
             });
         },
@@ -94296,53 +94159,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Operation",
@@ -94375,17 +94191,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 _this.url = "courrier/";
 
-                if (element === "isAttending") {
+                if (element === 0) {
 
-                    _this.url += "isAttending";
-                } else if (element === "isLost") {
+                    element = 1;
+                } else {
 
-                    _this.url += "isLost";
-                } else if (element === "isSend") {
-                    _this.url += "isSend";
-                } else if (element === "delivered") {
-
-                    _this.url += "deliveCourrier";
+                    element = 0;
                 }
 
                 var elements = {
@@ -94399,22 +94210,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         operate: function operate(element, url) {
 
-            axios.post(url, element).then(function (e) {
+            console.log(element);
+
+            axios.post('/archive/editEtat', element).then(function (e) {
+
+                console.log(e.data);
                 var toastHTML = void 0;
 
-                if (element.value === "isAttending") {
-
-                    toastHTML = '<span>😉Boumm !! Courrier Hors d\'attente </span><button class="btn-flat toast-action">Close</button>';
-                } else if (element.value === "isLost") {
-
-                    toastHTML = '<span>iiii!  Courrier Perdu  😢😭😭</span><button class="btn-flat toast-action">Close</button>';
-                } else if (element.value === "isSend") {
-
-                    toastHTML = '<span>Super!! Courrier Envoyé 👀👀😂😂</span><button class="btn-flat toast-action">Close</button>';
-                } else if (element.value === "delivered") {
-
-                    toastHTML = '<span>Super!! Courrier Enfin Delivré!!! 😢😭😭</span><button class="btn-flat toast-action">Close</button>';
-                }
+                toastHTML = '<span>😉Boumm !! Archive !!! </span><button class="btn-flat toast-action">Close</button>';
 
                 M.toast({ html: toastHTML });
             }).catch(function (e) {
@@ -94471,7 +94274,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("h1", [_vm._v("Etats Du courrier")]),
+      _c("h1", [_vm._v("Etats De l'archive")]),
       _vm._v(" "),
       _vm._l(_vm.tabOperateTransformed, function(element, index) {
         return _c(
@@ -94489,12 +94292,12 @@ var render = function() {
                 attrs: { "align-h": "center" }
               },
               [
-                _c("b-col", [_vm._v("Courrier en attente")]),
+                _c("b-col", [_vm._v("Archive en attente")]),
                 _vm._v(" "),
                 _c("b-col", [
                   _c("div", { staticClass: "switch" }, [
                     _c("label", [
-                      element.isAttending === _vm.inValide
+                      element.etat === 0
                         ? _c("input", {
                             directives: [
                               {
@@ -94504,10 +94307,11 @@ var render = function() {
                                 expression: "checkNames"
                               }
                             ],
-                            attrs: { type: "checkbox", value: "isAttending" },
+                            attrs: { type: "checkbox" },
                             domProps: {
+                              value: element.etat,
                               checked: Array.isArray(_vm.checkNames)
-                                ? _vm._i(_vm.checkNames, "isAttending") > -1
+                                ? _vm._i(_vm.checkNames, element.etat) > -1
                                 : _vm.checkNames
                             },
                             on: {
@@ -94516,7 +94320,7 @@ var render = function() {
                                   $$el = $event.target,
                                   $$c = $$el.checked ? true : false
                                 if (Array.isArray($$a)) {
-                                  var $$v = "isAttending",
+                                  var $$v = element.etat,
                                     $$i = _vm._i($$a, $$v)
                                   if ($$el.checked) {
                                     $$i < 0 &&
@@ -94535,205 +94339,9 @@ var render = function() {
                           })
                         : _vm._e(),
                       _vm._v(" "),
-                      element.isAttending === _vm.valide
+                      element.etat === 1
                         ? _c("input", {
                             attrs: { checked: "", type: "checkbox" }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "lever" })
-                    ])
-                  ])
-                ])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "b-row",
-              { staticClass: "w-100 state-courriel" },
-              [
-                _c("b-col", [_vm._v("Courrier en Envoyé")]),
-                _vm._v(" "),
-                _c("b-col", [
-                  _c("div", { staticClass: "switch" }, [
-                    _c("label", [
-                      element.isSend === _vm.inValide
-                        ? _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.checkNames,
-                                expression: "checkNames"
-                              }
-                            ],
-                            attrs: { type: "checkbox", value: "isSend" },
-                            domProps: {
-                              checked: Array.isArray(_vm.checkNames)
-                                ? _vm._i(_vm.checkNames, "isSend") > -1
-                                : _vm.checkNames
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$a = _vm.checkNames,
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = "isSend",
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      (_vm.checkNames = $$a.concat([$$v]))
-                                  } else {
-                                    $$i > -1 &&
-                                      (_vm.checkNames = $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1)))
-                                  }
-                                } else {
-                                  _vm.checkNames = $$c
-                                }
-                              }
-                            }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      element.isLost === _vm.valide
-                        ? _c("input", {
-                            attrs: { checked: "", type: "checkbox" }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "lever" })
-                    ])
-                  ])
-                ])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "b-row",
-              { staticClass: "w-100 state-courriel" },
-              [
-                _c("b-col", [_vm._v("Courrier en Perdu")]),
-                _vm._v(" "),
-                _c("b-col", [
-                  _c("div", { staticClass: "switch" }, [
-                    _c("label", [
-                      element.isLost === _vm.inValide
-                        ? _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.checkNames,
-                                expression: "checkNames"
-                              }
-                            ],
-                            attrs: { type: "checkbox", value: "isLost" },
-                            domProps: {
-                              checked: Array.isArray(_vm.checkNames)
-                                ? _vm._i(_vm.checkNames, "isLost") > -1
-                                : _vm.checkNames
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$a = _vm.checkNames,
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = "isLost",
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      (_vm.checkNames = $$a.concat([$$v]))
-                                  } else {
-                                    $$i > -1 &&
-                                      (_vm.checkNames = $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1)))
-                                  }
-                                } else {
-                                  _vm.checkNames = $$c
-                                }
-                              }
-                            }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      element.isLost === _vm.valide
-                        ? _c("input", {
-                            attrs: { checked: "", type: "checkbox" }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "lever" })
-                    ])
-                  ])
-                ])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "b-row",
-              { staticClass: "w-100 state-courriel" },
-              [
-                _c("b-col", [_vm._v("Courrier en Delivré")]),
-                _vm._v(" "),
-                _c("b-col", [
-                  _c("div", { staticClass: "switch" }, [
-                    _c("label", [
-                      element.delivered === _vm.inValide
-                        ? _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.checkNames,
-                                expression: "checkNames"
-                              }
-                            ],
-                            attrs: { type: "checkbox", value: "delivered" },
-                            domProps: {
-                              checked: Array.isArray(_vm.checkNames)
-                                ? _vm._i(_vm.checkNames, "delivered") > -1
-                                : _vm.checkNames
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$a = _vm.checkNames,
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = "delivered",
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      (_vm.checkNames = $$a.concat([$$v]))
-                                  } else {
-                                    $$i > -1 &&
-                                      (_vm.checkNames = $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1)))
-                                  }
-                                } else {
-                                  _vm.checkNames = $$c
-                                }
-                              }
-                            }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      element.delivered === _vm.valide
-                        ? _c("input", {
-                            attrs: {
-                              type: "checkbox",
-                              value: "delivered",
-                              checked: ""
-                            }
                           })
                         : _vm._e(),
                       _vm._v(" "),
@@ -94892,8 +94500,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     props: {
 
-        tabSearchCourrier: Array,
-        tabExpeditorCourrier: Array
+        tabSearch: Array,
+        tabCategorie: Array
 
     },
     components: { showCourrier: __WEBPACK_IMPORTED_MODULE_0__utils_show_courrier___default.a },
@@ -94906,29 +94514,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             count: 0
 
         };
-    },
-    mounted: function mounted() {
-
-        var app = this;
-        axios.get('courrier/getAllCourrier').then(function (e) {
-
-            var a = 2;
-            app.tabCourrier = e.data.courrier;
-            var tab_expediteur = e.data.expediteur;
-            var tab_destinataire = e.data.destinataire;
-
-            var i = 0;
-            app.tabCourrier.forEach(function (element) {
-
-                element.code = tab_destinataire[i].code;
-                element.avatar = tab_destinataire[i].avatar;
-                element.name = tab_destinataire[i].name;
-
-                i++;
-            });
-        }).catch(function (res) {
-            console.log(res.response);
-        });
     },
 
 
@@ -94950,6 +94535,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             return true;
         }
+    },
+
+    updated: function updated() {
+
+        // console.log("des categ")
+        //
+        // console.log(this.tabSearch)
+        // console.log(this.tabCategorie)
     }
 });
 
@@ -94963,8 +94556,8 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("show-courrier", {
     attrs: {
-      tabCourrier: _vm.tabSearchCourrier,
-      tabExpeditorCourrier: _vm.tabExpeditorCourrier,
+      tabSearch: _vm.tabSearch,
+      tabCategorie: _vm.tabCategorie,
       isShowBtnDate: false
     }
   })
@@ -95079,8 +94672,8 @@ var render = function() {
         [
           _c("show-courriel-search", {
             attrs: {
-              tabSearchCourrier: _vm.tabSearchCourrier,
-              tabExpeditorCourrier: _vm.tabExpeditorCourrier
+              tabSearch: _vm.tabSearchArchive,
+              tabCategorie: _vm.tabSearchCategorie
             }
           })
         ],
@@ -95573,7 +95166,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n*, ::after, ::before {\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box;\n}\n\n/*variable*/\n/*code framework*/\n.pull-left {\n  float: left;\n}\n.pull-right {\n  float: right;\n}\n.container {\n  padding: 0 0px;\n  /*max-width: 1150px;*/\n  margin: 0 auto;\n}\n.container-fluid {\n  width: 100%;\n  padding: 0;\n}\n.form-group-TheProgrammer {\n  margin-top: 20px;\n  margin-bottom: 20px;\n}\n.form-control-TheProgrammer {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-bottom: 1px solid rgba(91, 90, 90, 0.3);\n  outline: none;\n  padding-top: 5px;\n  padding-bottom: 5px;\n  font-size: 0.8em;\n}\n.form-control-TheProgrammer::-webkit-input-placeholder {\n  color: rgba(43, 42, 41, 0.5);\n}\n.form-control-TheProgrammer::-ms-input-placeholder {\n  color: rgba(43, 42, 41, 0.5);\n}\n.form-control-TheProgrammer::placeholder {\n  color: rgba(43, 42, 41, 0.5);\n}\n.btn-pink-TheProgrammer {\n  padding: 8px 20px;\n  color: white;\n  background-color: #ec407a;\n  border: 1px;\n  border-radius: 3px;\n  font-size: 1.5em;\n}\n.btn-pink-TheProgrammer:hover {\n  background-color: transparent;\n  border: 1px solid #ec407a;\n  color: #ec407a;\n  cursor: pointer;\n  -webkit-transition: background-color .3s;\n  transition: background-color .3s;\n}\nhtml {\n  height: 100%;\n}\nbody {\n  margin: 0;\n  padding: 0;\n  background: url(https://courierpro.local/images/images/logo2.png) center center/cover;\n  font-size: 1em;\n  overflow-x: hidden;\n  /*background:$bodyBackgroundColor;*/\n  color: #212529;\n  min-height: 100%;\n  font-family: 'Rubik',sans-serif;\n  font-weight: 300;\n}\nh1, h2, h3, h4, h5, h6 {\n  color: rgba(0, 0, 0, 0.7);\n  font-weight: 300;\n  /*    font-family: 'Open sans', sans-serif;*/\n}\nh1 {\n  font-size: 1.5rem;\n}\nh2 {\n  font-size: 1.3em;\n}\nh3 {\n  font-size: 1em;\n}\n.material-icons.md-18 {\n  font-size: 18px;\n}\n.material-icons.md-24 {\n  font-size: 24px;\n}\n.material-icons.md-36 {\n  font-size: 36px;\n}\n.material-icons.md-48 {\n  font-size: 48px;\n}\n\n/*\r\nhtml\r\n{\r\n    scrollbar-face-color: black;\r\n    scrollbar-shadow-color: black;\r\n    scrollbar-highlight-color: black;\r\n    scrollbar-3dlight-color: black;\r\n    scrollbar-darkshadow-color: black;\r\n    scrollbar-track-color: black;\r\n    scrollbar-arrow-color: black;\r\n}\r\n\r\n::-webkit-scrollbar\r\n\r\n{\r\n\r\n    width: 13px;\r\n\r\n    margin-right: 3px;\r\n\r\n}\r\n\r\n::-webkit-scrollbar-track\r\n\r\n{\r\n\r\n    -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,1);\r\n\r\n    border-radius: 10px;\r\n\r\n}\r\n\r\n::-webkit-scrollbar-thumb\r\n\r\n{\r\n\r\n    border-radius: 10px;\r\n\r\n\r\n\r\n    background-color:  rgba(0,0,0,0.4);\r\n\r\n}\r\n\r\n*/\n", ""]);
+exports.push([module.i, "\n*, ::after, ::before {\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box;\n}\n\n/*variable*/\n/*code framework*/\n.pull-left {\n  float: left;\n}\n.pull-right {\n  float: right;\n}\n.container {\n  padding: 0 0px;\n  /*max-width: 1150px;*/\n  margin: 0 auto;\n}\n.container-fluid {\n  width: 100%;\n  padding: 0;\n}\n.form-group-TheProgrammer {\n  margin-top: 20px;\n  margin-bottom: 20px;\n}\n.form-control-TheProgrammer {\n  border-top: none;\n  border-left: none;\n  border-right: none;\n  border-bottom: 1px solid rgba(91, 90, 90, 0.3);\n  outline: none;\n  padding-top: 5px;\n  padding-bottom: 5px;\n  font-size: 0.8em;\n}\n.form-control-TheProgrammer::-webkit-input-placeholder {\n  color: rgba(43, 42, 41, 0.5);\n}\n.form-control-TheProgrammer::-ms-input-placeholder {\n  color: rgba(43, 42, 41, 0.5);\n}\n.form-control-TheProgrammer::placeholder {\n  color: rgba(43, 42, 41, 0.5);\n}\n.btn-pink-TheProgrammer {\n  padding: 8px 20px;\n  color: white;\n  background-color: #ec407a;\n  border: 1px;\n  border-radius: 3px;\n  font-size: 1.5em;\n}\n.btn-pink-TheProgrammer:hover {\n  background-color: transparent;\n  border: 1px solid #ec407a;\n  color: #ec407a;\n  cursor: pointer;\n  -webkit-transition: background-color .3s;\n  transition: background-color .3s;\n}\nhtml {\n  height: 100%;\n}\nbody {\n  margin: 0;\n  padding: 0;\n  background: url(/images/images/logo2.png) center center/cover;\n  font-size: 1em;\n  overflow-x: hidden;\n  /*background:$bodyBackgroundColor;*/\n  color: #212529;\n  min-height: 100%;\n  font-family: 'Rubik',sans-serif;\n  font-weight: 300;\n}\nh1, h2, h3, h4, h5, h6 {\n  color: rgba(0, 0, 0, 0.7);\n  font-weight: 300;\n  /*    font-family: 'Open sans', sans-serif;*/\n}\nh1 {\n  font-size: 1.5rem;\n}\nh2 {\n  font-size: 1.3em;\n}\nh3 {\n  font-size: 1em;\n}\n.material-icons.md-18 {\n  font-size: 18px;\n}\n.material-icons.md-24 {\n  font-size: 24px;\n}\n.material-icons.md-36 {\n  font-size: 36px;\n}\n.material-icons.md-48 {\n  font-size: 48px;\n}\n\n/*\r\nhtml\r\n{\r\n    scrollbar-face-color: black;\r\n    scrollbar-shadow-color: black;\r\n    scrollbar-highlight-color: black;\r\n    scrollbar-3dlight-color: black;\r\n    scrollbar-darkshadow-color: black;\r\n    scrollbar-track-color: black;\r\n    scrollbar-arrow-color: black;\r\n}\r\n\r\n::-webkit-scrollbar\r\n\r\n{\r\n\r\n    width: 13px;\r\n\r\n    margin-right: 3px;\r\n\r\n}\r\n\r\n::-webkit-scrollbar-track\r\n\r\n{\r\n\r\n    -webkit-box-shadow: inset 0 0 7px rgba(0,0,0,1);\r\n\r\n    border-radius: 10px;\r\n\r\n}\r\n\r\n::-webkit-scrollbar-thumb\r\n\r\n{\r\n\r\n    border-radius: 10px;\r\n\r\n\r\n\r\n    background-color:  rgba(0,0,0,0.4);\r\n\r\n}\r\n\r\n*/\n", ""]);
 
 // exports
 
@@ -95917,17 +95510,17 @@ var containtMixin = {
 
             data: function data() {
                         return {
-                                    pathIcone: "https://courierpro.local/images/icone/",
-                                    pathImg: "https://courierpro.local/images/images/",
-                                    pathLogo: "https://courierpro.local/images/logo/",
-                                    pathSvg: 'https://courierpro.local/images/svg/',
-                                    pathVideo: 'https://courierpro.local/video/',
+                                    pathIcone: "/images/icone/",
+                                    pathImg: "/images/images/",
+                                    pathLogo: "/images/logo/",
+                                    pathSvg: '/images/svg/',
+                                    pathVideo: '/video/',
 
                                     //users
 
-                                    pathTemoignage: 'https://courierpro.local/images/users/temoignage/',
-                                    pathMiniatureUser: 'https://courierpro.local/storage/userMiniature/',
-                                    pathUserImg: 'https://courierpro.local/storage/user/',
+                                    pathTemoignage: '/images/users/temoignage/',
+                                    pathMiniatureUser: '/storage/userMiniature/',
+                                    pathUserImg: '/storage/user/',
 
                                     user: {
 
@@ -95953,7 +95546,7 @@ var containtMixin = {
                                                 console.log(error.response.data);
                                                 app.$router.push("/404");
                                     } else if (error.response.data.status = "401") {
-                                                z;
+
                                                 app.$router.push("/401");
                                     }
                         },

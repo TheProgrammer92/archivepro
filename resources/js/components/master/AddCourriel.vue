@@ -9,78 +9,67 @@
 
                 </b-row>
 
-                <b-row class="my-1 w-100">
-
-                    <b-col sm="3">
-                        <label class='label-add'>Expediteur</label>
-
-                    </b-col>
-
-                    <b-col sm="9">
-
-                        <select class="icons form-select-add" v-model="expediteur">
-
-                            <option v-for="(tab, index) in tabAllMember" :value="index" :data-icon="pathImg + '5.jpg'" class="left">{{tab.name}}</option>
-
-                        </select>
-                        <span class="errors"  v-if="hasError  && hasErrorExpediteur ? errors.expediteur : ''">{{errors.expediteur}}</span>
-                    </b-col>
-                </b-row>
 
 
                 <b-row class="my-1" >
                     <b-col sm="3">
-                        <label class='label-add' > type</label>
+                        <label class='label-add' > Nom</label>
                     </b-col>
                     <b-col sm="9">
-                        <b-form-input  class='form-input-add' type="text" v-model="type"/>
+                        <b-form-input  class='form-input-add' type="text" v-model="nom"/>
                     </b-col>
 
 
 
                 </b-row>
-            <span  class="errors" v-if="hasError  && hasErrorType ? errors.type : ''">{{errors.type}}</span>
-
-            <b-row class="my-1" >
-                    <b-col sm="3">
-                        <label class='label-add' > telephone</label>
-                    </b-col>
-                    <b-col sm="9">
-                        <b-form-input  class='form-input-add' type="number" v-model="telephone" />
-                    </b-col>
-                    <span  class="errors" v-if="hasError  && hasErrorTelephone ? errors.telephone : ''">{{errors.telephone}}</span>
-
-
-
-                </b-row>
+            <span  class="errors" v-if="hasError  && hasErrorNom ? errors.type : ''">{{errors.type}}</span>
 
                 <b-row class="my-1 w-100">
 
                     <b-col sm="3">
-                        <label class='label-add'>Destinataire</label>
+                        <label class='label-add'>Catégories</label>
 
                     </b-col>
 
                     <b-col sm="9">
-                        <select class="icons form-select-add"  v-model="destinataire">
+                        <select class="icons form-select-add"  v-model="categorie">
 
-                            <option v-for="tab in tabAllMember" :value="tab.id" :data-icon="pathImg + '5.jpg'" class="left">{{tab.name}}</option>
+                            <option v-for="value in tab_categorie" :value="value.id" :data-icon="pathImg + '5.jpg'" class="left">{{value.nom}}</option>
 
                         </select>
-                        <span  class="errors" v-if="hasError  && hasErrorDestinataire ? errors.destinataire : ''">{{errors.destinataire}}</span>
+                        <span  class="errors" v-if="hasError  && hasErrorCategorie ? errors.categorie : ''">{{errors.categorie}}</span>
+
+                    </b-col>
+                </b-row>
+
+
+                <b-row class="my-1 w-100">
+
+                    <b-col sm="3">
+                        <label class='label-add'>Service</label>
+
+                    </b-col>
+
+                    <b-col sm="9">
+                        <select class="icons form-select-add"  v-model="service">
+
+                            <option v-for="value in tab_service" :value="value.id" :data-icon="pathImg + '5.jpg'" class="left">{{value.nom}}</option>
+
+                        </select>
+                        <span  class="errors" v-if="hasError  && hasErrorService ? errors.service : ''">{{errors.service}}</span>
 
                     </b-col>
                 </b-row>
 
                 <b-row class="my-1" >
                     <b-col sm="3">
-                        <label class='label-add' > Code</label>
+                        <label class='label-add' > Fichier</label>
                     </b-col>
                     <b-col sm="9">
-                        <b-form-input  class='form-input-add' type="number"  v-model="code" />
+                        <b-form-file @change="onFileSelected" class='form-input-add' type="file"  drop-placeholder="Drop file here"  />
                     </b-col>
 
-                    <span  class="errors" v-if="hasError  && hasErrorCode ? errors.code : ''">{{errors.code}}</span>
+                    <span  class="errors" v-if="hasError  && hasErrorFichier ? errors.fichier : ''">{{errors.fichier}}</span>
 
 
 
@@ -110,8 +99,8 @@
 
             return {
                 type:"" ,
-                destinataire:"",
-                code :""
+                service:"",
+                fichier :""
             }
         }
     }*/
@@ -123,26 +112,29 @@
         data() {
             return {
 
-                tabAllMember:this.$route.params.tabAllMembers,
+
                 expediteur:"",
-                destinataire:"",
-                code:"",
+                service:"",
+                categorie:"",
+                fichier:"",
                 type:"",
                 telephone:"",
+                tab_categorie:this.$route.params.tab_categorie,
+                tab_service:this.$route.params.tab_service,
+                nom:'',
 
                 hasError: false,
-                hasErrorExpediteur:'',
-                hasErrorDestinataire:'',
-                hasErrorCode:'',
-                hasErrorType:'',
-                hasErrorTelephone:'',
+                hasErrorService:'',
+                hasErrorFichier:'',
+                hasErrorNom:'',
+                hasErrorCategorie:'',
                 error: '',
                 errors: {
                     expediteur:"",
-                    destinataire:"",
-                    code:"",
-                    type:"",
-                    telephone:""
+                    service:"",
+                    fichier:"",
+                    categorie:'',
+
                 },
                 success: false,
                 element: {}
@@ -153,11 +145,10 @@
             registerCourriel() {
                 let app = this;
 
-                //verification du code
+                //verification du fichier
                 //expediteur = index du tableau recuperé
 
 
-                if (app.code===app.tabAllMember[app.expediteur].code ) {
 
 
 
@@ -165,14 +156,15 @@
 
                     this.element =
                         {
-                        id_expediteur: app.tabAllMember[app.expediteur].id,
-                        id_destinataire: app.destinataire,
-                        code: app.code,
-                        numero: app.telephone,
-                        type: app.type
+
+                        nom: app.nom,
+                        fichier: app.fichier,
+                        service: app.service,
+                        categorie: app.categorie
                     };
 
-                    axios.post('courrier/registerCourriel',this.element)
+
+                    axios.post('archive/addArchive',this.element)
                         .then(e => {
 
 
@@ -180,12 +172,10 @@
                             app.hasError=false;
 
                             app.$parent.$children[3].changeIsMessage("Votre courrier a été enregistré Mr" )
-
-                            app.code="";
-                            app.telephone="";
-                            app.type="";
-                            app.id_expediteur="";
-                            app.destinataire=""
+                            app.nom="";
+                            app.fichier="";
+                            app.categorie="";
+                            app.service=""
 
 
 
@@ -197,72 +187,91 @@
 
 
                             app.hasError=true;
-                            if (_.isArray(res.response.data.errors.id_destinataire)) {
-                                app.hasErrorDestinataire= true;
-                                app.errors.destinataire= res.response.data.errors.id_destinataire[0];
+                            if (_.isArray(res.response.data.errors.service)) {
+                                app.hasErrorService= true;
+                                app.errors.service= res.response.data.errors.service[0];
                             }
 
-                            if (_.isArray(res.response.data.errors.id_expediteur)) {
+                            if (_.isArray(res.response.data.errors.categorie)) {
 
-                                app.hasErrorExpediteur=true;
-                                app.errors.expediteur= res.response.data.errors.id_expediteur[0];
+                                app.hasErrorCategorie=true;
+                                app.errors.categorie= res.response.data.errors.categorie[0];
                             }
 
-                            if (_.isArray(res.response.data.errors.type)) {
+                            if (_.isArray(res.response.data.errors.fichier)) {
 
-                                app.hasErrorType=true;
-                                app.errors.type=res.response.data.errors.type[0];
-
-                            }
-                            if (_.isArray(res.response.data.errors.code)) {
-
-                                app.hasErrorCode=true;
-                                app.errors.code=res.response.data.errors.code[0];
+                                app.hasErrorFichier=true;
+                                app.errors.fichier=res.response.data.errors.fichier[0];
 
                             }
 
-                            if (_.isArray(res.response.data.errors.telephone)) {
+                            if (_.isArray(res.response.data.errors.nom)) {
 
-                                app.hasErrorTelephone=true;
-                                app.errors.telephone=res.response.data.errors.telephone;
+                                app.hasErrorNom=true;
+                                app.errors.nom=res.response.data.errors.nom;
 
                             }
-
 
                         })
 
-                    }
-
-                    else {
-                    //affichage des erreur
-                    app.hasError=true;
-                    app.hasErrorCode=true;
-                }
 
 
-            }
+
+
+
+            },
+
+            onFileSelected:function(event) {
+
+
+
+                 this.fichier= event.target.files[0];
+
+
+
+            },
         },
 
         beforeRouteEnter(to, from , next) {
             let app = this;
-            axios.post('courrier/getAllMember')
+            axios.get('archive/categorie')
                 .then(e => {
 
 
-                    to.params.tabAllMembers = e.data.member;
-                    next();
+                    to.params.tab_categorie = e.data.categorie;
+                    console.log(e.data)
+
+
                 })
                 .catch(e => {
 
                     app.redirectError(e)
 
                 })
+
+            axios.get('archive/service')
+                .then(e => {
+
+                    to.params.tab_service = e.data.service;
+
+                    console.log(e)
+                    next();
+                })
+                .catch(e => {
+
+                    app.redirectError(e)
+                //
+                })
+
+
         },
 
 
         mounted() {
-             console.log("nouveau courriel")
-            console.log(this)
+
+
+
+
         }
 
 

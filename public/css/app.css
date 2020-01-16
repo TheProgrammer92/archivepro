@@ -81,7 +81,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: url(https://courierpro.local/images/images/logo2.png) center center/cover;
+  background: url(/images/images/logo2.png) center center/cover;
   font-size: 1em;
   overflow-x: hidden;
   /*background:$bodyBackgroundColor;*/

@@ -4,7 +4,9 @@
     <b-row  align-h="center" class="row-main-global w-100" >
 
 
-        <main class="main">
+      <router-link to="/nouveau">
+
+      <main class="main">
 
 
 
@@ -12,16 +14,16 @@
 
                 <i class="material-icons Medium">add_circle_outline</i>
 
-               <span class="text-add-he">     Cliquer ici pour Ajouter une note</span>
+               <span class="text-add-he">     Cliquer ici pour Ajouter une archive</span>
             </b-row>
 
-            <show-courrier  :tab-courrier="tabCourrier" :tab-expeditor-courrier="tab_expediteur"   :is-show-btn-date="true"></show-courrier>
+            <show-courrier  :tab-search="tabArchive" :tab-categorie="tabCategorie" :is-show-btn-date="true"></show-courrier>
 
 
 
         </main>
 
-
+      </router-link>
     </b-row>
 
 </template>
@@ -48,7 +50,8 @@
 
             return {
 
-                tabCourrier: [],
+                tabArchive: [],
+                tabCategorie:[],
                 valueBtnDate:[],
                 count:0,
                 tab_expediteur: [],
@@ -72,29 +75,11 @@
         mounted() {
 
             let app = this;
-            axios.get('courrier/getAllCourrier')
+            axios.get('archive/getAll')
                 .then(e => {
 
-
-                    app.tabCourrier = e.data.courrier;
-                    app.tab_expediteur = e.data.expediteur;
-                    app.tab_destinataire = e.data.destinataire;
-
-
-                    let i=0;
-                    app.tabCourrier.forEach(function (element) {
-
-                        element.code= tab_destinataire[i].code;
-                        element.avatar= tab_destinataire[i].avatar;
-                        element.name= tab_destinataire[i].name;
-
-                        i++;
-
-
-                    })
-
-
-
+                    app.tabArchive = e.data.archive;
+                    app.tabCategorie = e.data.categorie;
 
 
                 })

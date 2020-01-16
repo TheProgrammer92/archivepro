@@ -5,17 +5,17 @@ let containtMixin= {
 
     data:function () {
         return {
-            pathIcone:"https://courierpro.local/images/icone/",
-            pathImg:"https://courierpro.local/images/images/",
-            pathLogo:"https://courierpro.local/images/logo/",
-            pathSvg:'https://courierpro.local/images/svg/',
-            pathVideo:'https://courierpro.local/video/',
+            pathIcone:"/images/icone/",
+            pathImg:"/images/images/",
+            pathLogo:"/images/logo/",
+            pathSvg:'/images/svg/',
+            pathVideo:'/video/',
 
             //users
 
-            pathTemoignage:'https://courierpro.local/images/users/temoignage/',
-            pathMiniatureUser: 'https://courierpro.local/storage/userMiniature/',
-            pathUserImg: 'https://courierpro.local/storage/user/',
+            pathTemoignage:'/images/users/temoignage/',
+            pathMiniatureUser: '/storage/userMiniature/',
+            pathUserImg: '/storage/user/',
 
 
 
@@ -49,7 +49,7 @@ let containtMixin= {
             }
 
             else if(error.response.data.status="401") {
-z
+
                 app.$router.push("/401");
             }
 

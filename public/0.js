@@ -192,17 +192,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* export default {
@@ -211,8 +200,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
          return {
              type:"" ,
-             destinataire:"",
-             code :""
+             service:"",
+             fichier :""
          }
      }
  }*/
@@ -221,26 +210,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
 
-            tabAllMember: this.$route.params.tabAllMembers,
             expediteur: "",
-            destinataire: "",
-            code: "",
+            service: "",
+            categorie: "",
+            fichier: "",
             type: "",
             telephone: "",
+            tab_categorie: this.$route.params.tab_categorie,
+            tab_service: this.$route.params.tab_service,
+            nom: '',
 
             hasError: false,
-            hasErrorExpediteur: '',
-            hasErrorDestinataire: '',
-            hasErrorCode: '',
-            hasErrorType: '',
-            hasErrorTelephone: '',
+            hasErrorService: '',
+            hasErrorFichier: '',
+            hasErrorNom: '',
+            hasErrorCategorie: '',
             error: '',
             errors: {
                 expediteur: "",
-                destinataire: "",
-                code: "",
-                type: "",
-                telephone: ""
+                service: "",
+                fichier: "",
+                categorie: ''
+
             },
             success: false,
             element: {}
@@ -252,88 +243,89 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         registerCourriel: function registerCourriel() {
             var app = this;
 
-            //verification du code
+            //verification du fichier
             //expediteur = index du tableau recuperé
 
 
-            if (app.code === app.tabAllMember[app.expediteur].code) {
+            this.element = {
 
-                this.element = {
-                    id_expediteur: app.tabAllMember[app.expediteur].id,
-                    id_destinataire: app.destinataire,
-                    code: app.code,
-                    numero: app.telephone,
-                    type: app.type
-                };
+                nom: app.nom,
+                fichier: app.fichier,
+                service: app.service,
+                categorie: app.categorie
+            };
 
-                axios.post('courrier/registerCourriel', this.element).then(function (e) {
+            axios.post('archive/addArchive', this.element).then(function (e) {
 
-                    app.success = true;
-                    app.hasError = false;
+                app.success = true;
+                app.hasError = false;
 
-                    app.$parent.$children[3].changeIsMessage("Votre courrier a été enregistré Mr");
+                app.$parent.$children[3].changeIsMessage("Votre courrier a été enregistré Mr");
+                app.nom = "";
+                app.fichier = "";
+                app.categorie = "";
+                app.service = "";
+            }).catch(function (res) {
 
-                    app.code = "";
-                    app.telephone = "";
-                    app.type = "";
-                    app.id_expediteur = "";
-                    app.destinataire = "";
-                }).catch(function (res) {
+                console.log(res.response);
 
-                    console.log(res.response);
-
-                    app.hasError = true;
-                    if (_.isArray(res.response.data.errors.id_destinataire)) {
-                        app.hasErrorDestinataire = true;
-                        app.errors.destinataire = res.response.data.errors.id_destinataire[0];
-                    }
-
-                    if (_.isArray(res.response.data.errors.id_expediteur)) {
-
-                        app.hasErrorExpediteur = true;
-                        app.errors.expediteur = res.response.data.errors.id_expediteur[0];
-                    }
-
-                    if (_.isArray(res.response.data.errors.type)) {
-
-                        app.hasErrorType = true;
-                        app.errors.type = res.response.data.errors.type[0];
-                    }
-                    if (_.isArray(res.response.data.errors.code)) {
-
-                        app.hasErrorCode = true;
-                        app.errors.code = res.response.data.errors.code[0];
-                    }
-
-                    if (_.isArray(res.response.data.errors.telephone)) {
-
-                        app.hasErrorTelephone = true;
-                        app.errors.telephone = res.response.data.errors.telephone;
-                    }
-                });
-            } else {
-                //affichage des erreur
                 app.hasError = true;
-                app.hasErrorCode = true;
-            }
+                if (_.isArray(res.response.data.errors.service)) {
+                    app.hasErrorService = true;
+                    app.errors.service = res.response.data.errors.service[0];
+                }
+
+                if (_.isArray(res.response.data.errors.categorie)) {
+
+                    app.hasErrorCategorie = true;
+                    app.errors.categorie = res.response.data.errors.categorie[0];
+                }
+
+                if (_.isArray(res.response.data.errors.fichier)) {
+
+                    app.hasErrorFichier = true;
+                    app.errors.fichier = res.response.data.errors.fichier[0];
+                }
+
+                if (_.isArray(res.response.data.errors.nom)) {
+
+                    app.hasErrorNom = true;
+                    app.errors.nom = res.response.data.errors.nom;
+                }
+            });
+        },
+
+
+        onFileSelected: function onFileSelected(event) {
+
+            this.fichier = event.target.files[0];
         }
     },
 
     beforeRouteEnter: function beforeRouteEnter(to, from, next) {
         var app = this;
-        axios.post('courrier/getAllMember').then(function (e) {
+        axios.get('archive/categorie').then(function (e) {
 
-            to.params.tabAllMembers = e.data.member;
-            next();
+            to.params.tab_categorie = e.data.categorie;
+            console.log(e.data);
         }).catch(function (e) {
 
             app.redirectError(e);
         });
+
+        axios.get('archive/service').then(function (e) {
+
+            to.params.tab_service = e.data.service;
+
+            console.log(e);
+            next();
+        }).catch(function (e) {
+
+            app.redirectError(e);
+            //
+        });
     },
-    mounted: function mounted() {
-        console.log("nouveau courriel");
-        console.log(this);
-    }
+    mounted: function mounted() {}
 });
 
 /***/ }),
@@ -369,74 +361,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "b-row",
-            { staticClass: "my-1 w-100" },
-            [
-              _c("b-col", { attrs: { sm: "3" } }, [
-                _c("label", { staticClass: "label-add" }, [
-                  _vm._v("Expediteur")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("b-col", { attrs: { sm: "9" } }, [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.expediteur,
-                        expression: "expediteur"
-                      }
-                    ],
-                    staticClass: "icons form-select-add",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.expediteur = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      }
-                    }
-                  },
-                  _vm._l(_vm.tabAllMember, function(tab, index) {
-                    return _c(
-                      "option",
-                      {
-                        staticClass: "left",
-                        attrs: { "data-icon": _vm.pathImg + "5.jpg" },
-                        domProps: { value: index }
-                      },
-                      [_vm._v(_vm._s(tab.name))]
-                    )
-                  })
-                ),
-                _vm._v(" "),
-                (_vm.hasError && _vm.hasErrorExpediteur
-                ? _vm.errors.expediteur
-                : "")
-                  ? _c("span", { staticClass: "errors" }, [
-                      _vm._v(_vm._s(_vm.errors.expediteur))
-                    ])
-                  : _vm._e()
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-row",
             { staticClass: "my-1" },
             [
               _c("b-col", { attrs: { sm: "3" } }, [
-                _c("label", { staticClass: "label-add" }, [_vm._v(" type")])
+                _c("label", { staticClass: "label-add" }, [_vm._v(" Nom")])
               ]),
               _vm._v(" "),
               _c(
@@ -447,11 +375,11 @@ var render = function() {
                     staticClass: "form-input-add",
                     attrs: { type: "text" },
                     model: {
-                      value: _vm.type,
+                      value: _vm.nom,
                       callback: function($$v) {
-                        _vm.type = $$v
+                        _vm.nom = $$v
                       },
-                      expression: "type"
+                      expression: "nom"
                     }
                   })
                 ],
@@ -461,7 +389,7 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          (_vm.hasError && _vm.hasErrorType
+          (_vm.hasError && _vm.hasErrorNom
           ? _vm.errors.type
           : "")
             ? _c("span", { staticClass: "errors" }, [
@@ -471,51 +399,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "b-row",
-            { staticClass: "my-1" },
-            [
-              _c("b-col", { attrs: { sm: "3" } }, [
-                _c("label", { staticClass: "label-add" }, [
-                  _vm._v(" telephone")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "b-col",
-                { attrs: { sm: "9" } },
-                [
-                  _c("b-form-input", {
-                    staticClass: "form-input-add",
-                    attrs: { type: "number" },
-                    model: {
-                      value: _vm.telephone,
-                      callback: function($$v) {
-                        _vm.telephone = $$v
-                      },
-                      expression: "telephone"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              (_vm.hasError && _vm.hasErrorTelephone
-              ? _vm.errors.telephone
-              : "")
-                ? _c("span", { staticClass: "errors" }, [
-                    _vm._v(_vm._s(_vm.errors.telephone))
-                  ])
-                : _vm._e()
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-row",
             { staticClass: "my-1 w-100" },
             [
               _c("b-col", { attrs: { sm: "3" } }, [
                 _c("label", { staticClass: "label-add" }, [
-                  _vm._v("Destinataire")
+                  _vm._v("Catégories")
                 ])
               ]),
               _vm._v(" "),
@@ -527,8 +415,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.destinataire,
-                        expression: "destinataire"
+                        value: _vm.categorie,
+                        expression: "categorie"
                       }
                     ],
                     staticClass: "icons form-select-add",
@@ -542,30 +430,92 @@ var render = function() {
                             var val = "_value" in o ? o._value : o.value
                             return val
                           })
-                        _vm.destinataire = $event.target.multiple
+                        _vm.categorie = $event.target.multiple
                           ? $$selectedVal
                           : $$selectedVal[0]
                       }
                     }
                   },
-                  _vm._l(_vm.tabAllMember, function(tab) {
+                  _vm._l(_vm.tab_categorie, function(value) {
                     return _c(
                       "option",
                       {
                         staticClass: "left",
                         attrs: { "data-icon": _vm.pathImg + "5.jpg" },
-                        domProps: { value: tab.id }
+                        domProps: { value: value.id }
                       },
-                      [_vm._v(_vm._s(tab.name))]
+                      [_vm._v(_vm._s(value.nom))]
                     )
                   })
                 ),
                 _vm._v(" "),
-                (_vm.hasError && _vm.hasErrorDestinataire
-                ? _vm.errors.destinataire
+                (_vm.hasError && _vm.hasErrorCategorie
+                ? _vm.errors.categorie
                 : "")
                   ? _c("span", { staticClass: "errors" }, [
-                      _vm._v(_vm._s(_vm.errors.destinataire))
+                      _vm._v(_vm._s(_vm.errors.categorie))
+                    ])
+                  : _vm._e()
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-row",
+            { staticClass: "my-1 w-100" },
+            [
+              _c("b-col", { attrs: { sm: "3" } }, [
+                _c("label", { staticClass: "label-add" }, [_vm._v("Service")])
+              ]),
+              _vm._v(" "),
+              _c("b-col", { attrs: { sm: "9" } }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.service,
+                        expression: "service"
+                      }
+                    ],
+                    staticClass: "icons form-select-add",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.service = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  _vm._l(_vm.tab_service, function(value) {
+                    return _c(
+                      "option",
+                      {
+                        staticClass: "left",
+                        attrs: { "data-icon": _vm.pathImg + "5.jpg" },
+                        domProps: { value: value.id }
+                      },
+                      [_vm._v(_vm._s(value.nom))]
+                    )
+                  })
+                ),
+                _vm._v(" "),
+                (_vm.hasError && _vm.hasErrorService
+                ? _vm.errors.service
+                : "")
+                  ? _c("span", { staticClass: "errors" }, [
+                      _vm._v(_vm._s(_vm.errors.service))
                     ])
                   : _vm._e()
               ])
@@ -578,33 +528,30 @@ var render = function() {
             { staticClass: "my-1" },
             [
               _c("b-col", { attrs: { sm: "3" } }, [
-                _c("label", { staticClass: "label-add" }, [_vm._v(" Code")])
+                _c("label", { staticClass: "label-add" }, [_vm._v(" Fichier")])
               ]),
               _vm._v(" "),
               _c(
                 "b-col",
                 { attrs: { sm: "9" } },
                 [
-                  _c("b-form-input", {
+                  _c("b-form-file", {
                     staticClass: "form-input-add",
-                    attrs: { type: "number" },
-                    model: {
-                      value: _vm.code,
-                      callback: function($$v) {
-                        _vm.code = $$v
-                      },
-                      expression: "code"
-                    }
+                    attrs: {
+                      type: "file",
+                      "drop-placeholder": "Drop file here"
+                    },
+                    on: { change: _vm.onFileSelected }
                   })
                 ],
                 1
               ),
               _vm._v(" "),
-              (_vm.hasError && _vm.hasErrorCode
-              ? _vm.errors.code
+              (_vm.hasError && _vm.hasErrorFichier
+              ? _vm.errors.fichier
               : "")
                 ? _c("span", { staticClass: "errors" }, [
-                    _vm._v(_vm._s(_vm.errors.code))
+                    _vm._v(_vm._s(_vm.errors.fichier))
                   ])
                 : _vm._e()
             ],

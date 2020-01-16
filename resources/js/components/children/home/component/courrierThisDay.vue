@@ -5,8 +5,9 @@
         <b-row class="w-100 card-show-btn" >
 
             <a class="waves-effect waves-light btn"> Aujourd'hui</a>
+            <a class="waves-effect waves-light btn"> Demain</a>
         </b-row>
-        <b-row class="card-show w-100" v-for="(value,cle) in tabCourrier" :key="cle">
+        <b-row class="card-show w-100" v-for="(value,cle) in tabArchive" :key="cle">
 
             <!--      <b-row class="w-100 card-show-btn" v-if="getDate(value,cle)">
 
@@ -20,11 +21,11 @@
                     <span ></span>
                 </label>
 
-                <span> <span class="text-code-courier"> Code: {{value.code}}</span>
-                            <span class="text-name-receptor">Courier pour <strong>{{value.name}}</strong>
+                <span> <span class="text-code-courier"> Code: {{value.id}}</span>
+                            <span class="text-name-receptor">Archive pour <strong>{{value.nom}}</strong>
                             </span>
 
-                            <span class="text-name-receptor">Courier pour <strong>{{value.updated_at}}</strong>
+                            <span class="text-name-receptor">Date pour <strong>{{value.updated_at}}</strong>
                             </span>
 
                         </span>
@@ -40,7 +41,7 @@
 
             return {
 
-                tabCourrier: [],
+                tabArchive: [],
                 valueBtnDate: [],
                 count: 0,
 
@@ -50,27 +51,11 @@
         mounted() {
 
             let app = this;
-            axios.get('courrier/getAllCourrier')
+            axios.get('archive/getAll')
                 .then(e => {
 
 
-                    app.tabCourrier = e.data.courrier;
-                    let tab_expediteur = e.data.expediteur;
-                    let tab_destinataire = e.data.destinataire;
-
-
-                    let i=0;
-                    app.tabCourrier.forEach(function (element) {
-
-                        element.code= tab_destinataire[i].code;
-                        element.avatar= tab_destinataire[i].avatar;
-                        element.name= tab_destinataire[i].name;
-
-                        i++;
-
-
-                    })
-
+                    app.tabArchive = e.data.archive;
 
 
 

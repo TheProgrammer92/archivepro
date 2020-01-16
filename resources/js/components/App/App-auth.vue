@@ -86,7 +86,7 @@
 
             $(function () {
 
-                $('body').css('background','url(https://courierpro.local/images/images/logo4.jpg) center center /cover  ')
+                $('body').css('background','url(/images/images/logo4.jpg) center center /cover  ')
 
 
             });

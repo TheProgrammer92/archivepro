@@ -43,6 +43,22 @@
 
 
 
+
+
+
+    Route::prefix('archive')->group(function () {
+
+        Route::resource('categorie', 'archive\CategorieController');
+        Route::resource('service', 'archive\serviceController');
+        Route::post('addArchive', 'archive\AddArchiveController@add');
+        Route::post('search', 'archive\AddArchiveController@search');
+        Route::post('editEtat', 'archive\AddArchiveController@editEtat');
+        Route::get('getAll', 'archive\AddArchiveController@getAll');
+
+    });
+
+
+
     Route::prefix('profil')->group(function () {
 
         Route::post('update','UpdateUserController@update');
@@ -50,6 +66,25 @@
         Route::post('updateEmail','UpdateUserController@updateEmail');
         Route::post('avatar','ImageController@store');
     });
+
+
+
+
+    //temoignage
+    Route::prefix('temoignage')->group(function () {
+
+        //update user for temoignage
+        Route::post('updateUserTemoignage','UpdateTemoignageController@update');
+
+        //make temoignage
+        Route::post('make','UpdateTemoignageController@make');
+        Route::get('family','UpdateTemoignageController@getFamilly');
+
+
+
+    });
+
+
 
     //temoignage
     Route::prefix('temoignage')->group(function () {

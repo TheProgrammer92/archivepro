@@ -12,13 +12,15 @@ class User extends Authenticatable   implements JWTSubject
 {
     use Notifiable;
 
+    protected  $table ="users_archive";
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name','avatar','email','role','telephone','sexe','code'
+        'name','avatar','email','role','telephone','sexe','code','prenom'
     ];
 
     /**
