@@ -13,13 +13,13 @@
 
 
            <b-row class="w-100 state-courriel" align-h="center">
-               <b-col>Archive en attente</b-col>
+               <b-col>Modifier l'archive</b-col>
 
                <b-col>
                    <div class="switch">
                        <label>
                            <input v-if="element.etat===0"  type="checkbox" :value="element.etat" v-model="checkNames">
-                           <input v-if="element.etat===1" checked  type="checkbox" >
+                           <input v-if="element.etat===1" checked  type="checkbox" v-model="checkNames">
                            <span class="lever"></span>
 
                        </label>
@@ -67,15 +67,10 @@
 
             beginOperate:function(value) {
 
-
-
-
                 this.checkNames.forEach(element => {
 
 
                     this.url = "courrier/";
-
-
 
                     if (element === 0) {
 
@@ -92,7 +87,7 @@
                     let elements= {
                         id:value.id,
                         value:element
-                    }
+                    };
 
                     this.operate(elements,this.url)
                 })
@@ -103,6 +98,8 @@
             operate:function(element,url) {
 
                 console.log(element)
+
+
 
                 axios.post('/archive/editEtat',element)
                     .then(e => {

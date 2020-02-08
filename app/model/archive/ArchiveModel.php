@@ -10,6 +10,6 @@ class ArchiveModel extends Model
 
     protected $table= "archive";
 
-    protected  $fillable = ['id_service','id_categorie','etat','fichier'];
+    protected  $fillable = ['id_service','id_categorie','etat','fichier', 'id_user'];
 
 }

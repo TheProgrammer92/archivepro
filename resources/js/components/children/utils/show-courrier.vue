@@ -8,6 +8,8 @@
 
 
 
+
+
         <b-row class="card-show w-100" v-for="(value,cle) in tabSearch" v-if="value.id_cat===categorie.id" :key="cle">
 
             <!--      <b-row class="w-100 card-show-btn" v-if="getDate(value,cle)">
@@ -17,7 +19,7 @@
 
             <!--<affiche-delivered-courrier v-if="isShowDeliveCourrier" :tabInfoCourrierDelive="value" ></affiche-delivered-courrier>-->
 
-            <b-row class="card-show-content w-100">
+            <b-row :class="{'bg-gray': value.etat===1, 'bg-white':value.etat===0,'card-show-content w-100':true}">
 
                 <b-row class="w-50">
 
@@ -28,8 +30,8 @@
                     </label>
 
                     <span> <span class="text-code-courier"> Code: {{value.nom}}</span>
-                    <span class="text-name-receptor">Archive de <strong>{{value.nom}}</strong>
-                    </span>
+                    <span class="text-name-receptor">Archive de <strong>{{value.nom}}</strong></span>
+                    <span class="text-name-receptor">archive <strong>{{value.etat ===0? '  Valide'  : ' Non valide'}}</strong></span>
 
                     <!--<span class="text-name-receptor">Courier pour <strong>{{value.type}}</strong></span>-->
                 </span>
@@ -51,6 +53,16 @@
 
 
         </b-row>
+
+
+
+            <b-row class="card-show w-100" v-else>
+
+               <div>
+
+                  <p> <small style="color:black">Aucune archive pour cette catégorie</small></p>
+               </div>
+            </b-row>
         </b-row>
     </b-row>
 </template>
@@ -149,9 +161,20 @@
 
     }
 
+
+
+       .bg-white{
+
+           background:white;
+       }
+       .bg-gray {
+
+           background:rgba(0,0,0,.1);
+       }
+
     .card-show-content {
 
-        background-color:white;
+
         padding:10px;
         margin:8px 0;
 

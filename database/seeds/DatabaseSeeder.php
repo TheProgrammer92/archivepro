@@ -14,6 +14,9 @@
 
             $this->call([
                 UsersSeeder::class,
+                CategorieSeeder::class,
+                ServiceSeeder::class,
+                RoleSeeder::class,
 
 
 

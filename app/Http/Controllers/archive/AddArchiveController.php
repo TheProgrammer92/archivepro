@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
+
 class AddArchiveController extends Controller
 {
     //
 
     public function getAll() {
 
-        $archive = ArchiveModel::all();
+        $archive = ArchiveModel::where('id_user',auth::user()->id)->get();
 
         $categorie = CategorieModel::all();
 
@@ -40,6 +41,7 @@ class AddArchiveController extends Controller
         $archive->nom= $request->nom;
         $archive->id_service = $request->service;
         $archive->id_cat= $request->categorie;
+        $archive->id_user= auth::user()->id;
         $archive->etat=0;
        $archive->fichier="Mon fichier.pdf";
 

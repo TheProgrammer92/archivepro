@@ -36,22 +36,22 @@ let containtMixin= {
             console.log(error.response)
 
 
-            if (error.response.data.status="500") {
-
-                app.$router.push("/500");
-
-            }
-
-            else if(error.response.data.status="404") {
-                console.log("erreur 404");
-                console.log(error.response.data);
-                app.$router.push("/404");
-            }
-
-            else if(error.response.data.status="401") {
-
-                app.$router.push("/401");
-            }
+            // if (error.response.data.status="500") {
+            //
+            //     app.$router.push("/500");
+            //
+            // }
+            //
+            // else if(error.response.data.status="404") {
+            //     console.log("erreur 404");
+            //     console.log(error.response.data);
+            //     app.$router.push("/404");
+            // }
+            //
+            // else if(error.response.data.status="401") {
+            //
+            //     app.$router.push("/401");
+            // }
 
         },
 

@@ -42,21 +42,7 @@
 
                         >
 
-                        <b-form-group id="code"
 
-                                      label-for="code"
-                                      :description="hasError && hasErrorCode ? '' : errors.code">
-
-                            <b-form-input id="code"
-                                          type="password"
-                                          v-model="code"
-                                          required
-                                          placeholder="enter code"
-                                          >
-                            </b-form-input>
-                           <!-- <span class="floating-label">enter email</span>-->
-
-                        </b-form-group>
 
 
                         <b-form-group id="exampleGroup4">
@@ -109,7 +95,7 @@
                 errors: {
                     email:'',
                     password:'',
-                    code:''
+
                 },
                 error_login:''
             }
@@ -126,7 +112,7 @@
                     data: {
                         email: app.email,
                         password: app.password,
-                        code: app.code
+
                     },
                     success: function(e) {
                         // handle redirection*
@@ -155,10 +141,7 @@
                             app.errors.password= errors.password[0];
                         }
 
-                        if (errors.code){
-                            app.hasErrorCode= true;
-                            app.errors.code= errors.code[0];
-                        }
+
                     },
                     rememberMe: true,
                     fetchUser: true

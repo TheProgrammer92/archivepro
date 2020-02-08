@@ -1,31 +1,71 @@
-<p align="center"><img src="https://scontent-ams3-1.xx.fbcdn.net/v/t1.0-9/41764914_710614205941163_1025757100749357056_n.jpg?_nc_cat=106&_nc_ht=scontent-ams3-1.xx&oh=0e0a0091a2e2d7a8ff828b0dce82f64d&oe=5C68059B" width="150px" height="150px"> </p>
+## CONFIGURATION
 
-##  facebook ..   jesbeer nguimatiio
-## twiter.. theProgrammer
-
-##  About TheProgrammer
-
- Je suis TheProgrammer , fou passionné de la programmation , ca fait disons presque 2ans  et demi que je dev....
-  Mes langages principaux du moment:
-  html  css(sass, bootstrap) , js(vue.js, jQuery) , PHP ( laravel)
-   sinon a part ca : j'ai un peu touché du angular , ionic ^^^     java, python ,C , assembleur
-voila , c'est tout, et puis je partage désormais ma  passion en faisans des vidéo  , sur YouTube  , ma derniere vidéo ^^ 
-En dehors de la programmation, j'suis aussi pianiste!!  , ca m'aide des fois ..
-##Youtube <a href="https://www.youtube.com/channel/UCNYGX422brt1H41aded1bTA/featured?sub_confirmation=1">theProgrammer Youtube</a>
+#Faites cette config pour lancer le projet 
 
 
 
+-  Installer laragon ou wamp , et le lancer  
+-  Intaller composer
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+
+- creer une base de données "courierpro""  dans votre gestionnaire, de base (Laragon )
+
+- ouvrir le projet ta tapper la commande   **composer update**
+
+- changer le nom du fichier **.env.example** en  "**.env**"
+
+-  Dans le fichier .env , modifier     DB_DATABASE = courierpro
+
+- ensuite  taper la commande  **php artisan key:generate**
+
+- taper la commande **php artisan migrate**
+
+- Lancer le projet maintenant, **php artisan serve**
+
+ `VERSION PHP  7.2 `
+
+ ```VERSION Laravel  6.2 ```
+
+ ```VERSION Vue.js  2.5.17 ```
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+## Outils et dépendances  (le plus importantes )
 
 
 
-## Contributeur
 
-TheProgrammer, juste moi et mon groupe, merci pour le soutien
-## Security Vulnerabilities
+   "intervention/image": "^2.4",
+        "laravel/framework": "5.7.*",
+        "laravel/tinker": "^1.0",
+        "tymon/jwt-auth": "dev-develop"
+## Backend
 
-......
-## License
+- laravel/framework": "5.7.*
 
-TheProgrammer....
+- laravel/tinker": "^1.0
+
+- tymon/jwt-auth": "dev-develop
+
+-  intervention/image": "^2.4
+
+- laravel/telescope": "^1.0"
+
+
+
+## Frontend
+   
+ - vue-axios": "^2.1.4
+ - vue-router": "^3.0.1
+ - bootstrap-vue": "^2.0.0-rc.11
+ - materialize-css": "^1.0.0-rc.2
+ -  jquery": "^3.2
+ - laravel-mix": "^2.0
+ -  vue": "^2.5.17
+ - cross-env": "^5.1
+    
+ **# ENJOY NOW**  TheProgrammer !!! 

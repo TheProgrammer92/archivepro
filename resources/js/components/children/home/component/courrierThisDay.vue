@@ -15,13 +15,16 @@
                   </b-row>-->
 
 
-            <b-row class="card-show-content w-100">
+            <b-row :class="{'bg-gray': value.etat===0, 'bg-white':value.etat===1,'card-show-content w-100':true}">
                 <label>
                     <input type="checkbox" />
                     <span ></span>
                 </label>
 
-                <span> <span class="text-code-courier"> Code: {{value.id}}</span>
+                <span>
+
+                    {{value}}
+                    <span class="text-code-courier"> {{value.etat}}Code: {{value.id}}</span>
                             <span class="text-name-receptor">Archive pour <strong>{{value.nom}}</strong>
                             </span>
 
@@ -104,6 +107,3 @@
 
 </script>
 
-<style scoped>
-
-</style>

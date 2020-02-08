@@ -31,7 +31,7 @@ class UsersSeeder extends Seeder
             'prenom' => 'free',
             'email' => 'admin@test.com',
             'password' => Hash::make('admin'),
-            'role' => 2,
+            'role' => 1,
             'code' => 2222,
         ]);
 
@@ -42,7 +42,7 @@ class UsersSeeder extends Seeder
             'prenom' => 'free',
             'email' => 'user@test.com',
             'password' => Hash::make('secret'),
-            'role' => 3,
+            'role' =>2,
             'code' =>5555,
 
         ]);
