@@ -1,16 +1,17 @@
 <template>
-    <show-courrier :tabSearch="tabSearch" :tabCategorie="tabCategorie"  :isShowBtnDate="false"></show-courrier>
+    <show-courrier :isShowBtnDate="false"></show-courrier>
 </template>
 
 <script>
 
     import showCourrier from "../utils/show-courrier"
+
+    import {mapGetters} from "vuex";
+
     export  default {
 
         props: {
 
-            tabSearch:Array,
-            tabCategorie:Array
 
 
         },
@@ -28,6 +29,21 @@
 
             }
         },
+
+
+
+            computed: {
+
+                ...mapGetters('archive' , [
+                    'tabService',
+                    'tabCategorie',
+                    'tabArchive' ,
+                    'countResultSearch'
+                ])
+
+            },
+
+
 
         methods: {
             //gestion de la date affiché sur le button

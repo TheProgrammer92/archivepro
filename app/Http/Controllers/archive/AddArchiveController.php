@@ -5,6 +5,7 @@ namespace App\Http\Controllers\archive;
 use App\Http\Requests\AddArchiveRequest;
 use App\model\archive\ArchiveModel;
 use App\model\archive\CategorieModel;
+use App\model\archive\ServiceModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,6 +21,7 @@ class AddArchiveController extends Controller
     public function getAll() {
 
         $archive = ArchiveModel::where('id_user',auth::user()->id)->get();
+        $service = ServiceModel::where('role',auth::user()->role)->get();
 
         $categorie = CategorieModel::all();
 
@@ -30,7 +32,8 @@ class AddArchiveController extends Controller
             [
                 'status' => 'success',
                 'archive' => $archive,
-                'categorie'=>$categorie
+                'categorie'=>$categorie,
+                "service" => $service
             ], 200);
     }
 
@@ -66,11 +69,14 @@ class AddArchiveController extends Controller
             ->get();
 
         $categorie = CategorieModel::all();
+        $service = ServiceModel::where('role',auth::user()->role)->get();
+
         return response()->json(
             [
                 'status' => 'success',
                 'archive' => $archive,
-                'categorie'=>$categorie
+                'categorie'=>$categorie,
+                "service" => $service
             ], 200);
 
 

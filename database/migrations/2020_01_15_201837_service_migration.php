@@ -18,6 +18,7 @@ class ServiceMigration extends Migration
         Schema::create('service_archive', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nom');
+            $table->integer('role')->default(1);
 
 
             $table->timestamps();

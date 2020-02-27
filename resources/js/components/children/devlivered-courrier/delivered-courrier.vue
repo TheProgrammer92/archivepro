@@ -4,7 +4,7 @@
         <transition name="lightSpeedIn">
 
 
-            <operation-courriel  :tabOperateTransformed="tabOperateTransformed"     v-if="isShowOperate" ></operation-courriel>
+            <operation-courriel   v-if="isOperateArchive" ></operation-courriel>
         </transition>
 
         <b-row classs="w-75" align-h="center" style="flex-direction: column">
@@ -37,7 +37,7 @@
 
 
 
-            <show-courriel-search :tabSearch="tabSearchArchive" :tabCategorie="tabSearchCategorie" ></show-courriel-search>
+            <show-courriel-search ></show-courriel-search>
 
         </b-row>
 
@@ -50,16 +50,15 @@
     import OperationCourriel from "../OperationCourriel/Operation-courriel"
 
     import showCourrielSearch from "../devlivered-courrier/show-courrier-search"
+
+    import {mapActions , mapGetters} from 'vuex'
     export default {
         data() {
             return {
                 search: '',
 
-                tabSearchArchive:[],
-                tabSearchCategorie:[],
 
                 element: {},
-                countResultSearch:0,
                 isShowOperate:false,
 
                 tabOperateTransformed:[]
@@ -76,65 +75,48 @@
             }
         },
 
+        computed: {
+
+            ...mapGetters('archive' , [
+                'tabService',
+                'tabCategorie',
+                'tabArchive' ,
+                 'countResultSearch',
+                'isOperateArchive'
+                ])
+
+        },
+
 
 
 
         methods: {
 
+            ...mapActions('archive' , [
+                'searchArchive',
+                'setTabOperateArchive'
+            ]),
+
 
             searchCourriel:function () {
-                console.log(this.search)
+
                 let app = this;
                 this.element = {
 
                     search:app.search
                 };
 
-                axios.post("archive/search",this.element)
-                    .then(e => {
-
-                        app.tabSearchArchive = e.data.archive;
-                        app.tabSearchCategorie = e.data.categorie;
-                        app.countResultSearch=app.tabSearchArchive.length;
-
-
-
-                        console.log(e.data)
-
-
-                    })
-                    .catch(e => {
-
-
-                        console.log(e)
-                        console.log("search error")
-                    })
-            },
-
-            getIsShowOperate() {
+                this.searchArchive(this.element)
 
 
             },
 
-            setIsShowOperate() {
-                this.isShowOperate = !this.isShowOperate
 
-            },
 
-            setTabOperate(value) {
 
-                this.isShowOperate = !this.isShowOperate
-
-                this.tabOperateTransformed= []
-                this.tabOperateTransformed.push(value)
-
-            }
         },
 
-        updated(){
 
-
-        }
 
     }
 </script>

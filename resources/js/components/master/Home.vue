@@ -3,7 +3,7 @@
 
     <b-row  align-h="center" class="row-main-global w-100" >
 
-
+        <operation-courriel   v-if="isOperateArchive" ></operation-courriel>
       <router-link to="/nouveau">
 
       <main class="main">
@@ -17,7 +17,9 @@
                <span class="text-add-he">     Cliquer ici pour Ajouter une archive</span>
             </b-row>
 
-            <show-courrier  :tab-search="tabArchive" :tab-categorie="tabCategorie" :is-show-btn-date="true"></show-courrier>
+
+
+            <show-courrier :is-show-btn-date="true"></show-courrier>
 
 
 
@@ -30,6 +32,8 @@
 
 
 <script>
+    import OperationCourriel from "../children/OperationCourriel/Operation-courriel"
+
     import MainHomeComponent from '../children/home/modules/MainHomeComponent.vue'
     import MainRecentProjet from '../children/home/modules/MainRecentProjet.vue'
     import HomeRealisationComponent from '../children/home/modules/HomeRealisationComponent.vue'
@@ -45,13 +49,14 @@
     import * as moment from 'moment';
     import 'moment/locale/pt-br';
 
+    import {mapActions, mapGetters} from "vuex";
+
     export  default {
         data() {
 
             return {
 
-                tabArchive: [],
-                tabCategorie:[],
+
                 valueBtnDate:[],
                 count:0,
                 tab_expediteur: [],
@@ -69,27 +74,31 @@
             CarousselHome,
             modalTemoignage,
             courrierThisDay,
-            showCourrier
+            showCourrier,
+            OperationCourriel
 
         },
         mounted() {
 
-            let app = this;
-            axios.get('archive/getAll')
-                .then(e => {
+            this.getAllArchive()
 
-                    app.tabArchive = e.data.archive;
-                    app.tabCategorie = e.data.categorie;
+        },
 
-
-                })
-                .catch(res => {
-                    console.log(res.response)
-
-                })
+        computed:{
+            ...mapGetters('archive' , [
+                'tabService',
+                'tabCategorie',
+                'tabArchive',
+                'isOperateArchive'
+            ])
         },
 
         methods: {
+            ...mapActions('archive', [
+
+                'getAllArchive'
+            ]),
+
             //gestion de la date affiché sur le button
             getDate:function (element,cle) {
 
@@ -118,10 +127,6 @@
 
             }
         },
-
-        created() {
-
-        }
 
     }
 </script>

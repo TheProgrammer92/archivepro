@@ -6,6 +6,8 @@ import VueRouter from "vue-router";
 
 import auth from './components/children/auth/auth'
 
+import store from './components/store/index';
+
 
 //for my app
 import  App from './App.vue'
@@ -21,6 +23,7 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+
 //for date
 import * as moment from 'moment';
 import 'moment/locale/pt-br';
@@ -29,6 +32,9 @@ import error_404 from './components/errors/404'
 import InfiniteLoading from 'vue-infinite-loading';
 
 
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
 //infinite loading
 
 Vue.use(InfiniteLoading);
@@ -56,6 +62,7 @@ Vue.component('InfiniteLoading', require('vue-infinite-loading'));
 
 let vm = new Vue({
     el: '#app',
+
     data:{
        screen:"jesbeer TheProgrammer",
         name:"",
@@ -76,7 +83,7 @@ let vm = new Vue({
 
 
     router,
-
+    store,
 
     methods: {
 

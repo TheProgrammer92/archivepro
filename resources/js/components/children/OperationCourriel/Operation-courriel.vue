@@ -4,12 +4,12 @@
     <b-row  class="operate-global-courriel" align-h="center" align-v="start"  >
 
 
-       <span  ><i class=" material-icons icon-close" @click.prevent="showOperateCourriel">close</i></span>
+       <span  ><i class=" material-icons icon-close" @click.prevent="showOperateArchive">close</i></span>
 
         <h1>Etats De l'archive</h1>
 
 
-       <b-row align-h="center" class="w-100 div-state-courriel" v-for="(element,index) in tabOperateTransformed" :key="index">
+       <b-row align-h="center" class="w-100 div-state-courriel" v-for="(element,index) in tabOperateArchive" :key="index">
 
 
            <b-row class="w-100 state-courriel" align-h="center">
@@ -40,6 +40,9 @@
 </template>
 
 <script>
+
+    import {mapGetters,mapActions} from "vuex"
+
     export default {
         name: "Operation" ,
 
@@ -62,8 +65,21 @@
             }
         },
 
+        computed: {
+
+            ...mapGetters('archive' , [
+
+                'tabOperateArchive'
+            ])
+        },
+
 
         methods: {
+
+            ...mapActions('archive' , [
+                'archiveModifystate'
+                ,'showOperateArchive'
+            ]),
 
             beginOperate:function(value) {
 
@@ -99,43 +115,15 @@
 
                 console.log(element)
 
-
-
-                axios.post('/archive/editEtat',element)
-                    .then(e => {
-
-                        console.log(e.data)
-                        let toastHTML;
+                this.archiveModifystate(element)
 
 
 
-                            toastHTML='<span>😉Boumm !! Archive !!! </span><button class="btn-flat toast-action">Close</button>';
-
-
-
-
-                        M.toast({html: toastHTML});
-                    })
-                    .catch(e => {
-
-                        console.log(e.response)
-                    })
             },
 
-            showOperateCourriel :function () {
 
 
-                this.$parent.setIsShowOperate();
-            },
-            getIsShowOperate: function () {
-                return this.isShowOperate;
-            },
 
-            setTabOperate:function(tab) {
-
-                this.tabOperateTransformed.push(tab)
-
-            },
 
 
         },
