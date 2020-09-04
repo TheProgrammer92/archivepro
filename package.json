@@ -29,7 +29,7 @@
         "vue-axios": "^2.1.4",
         "vue-filter-date-format": "^1.1.4",
         "vue-infinite-loading": "^2.4.3",
-        "vue-moment": "^4.0.0",
+        "vue-moment": "^4.1.0",
         "vue-moment-lib": "^1.2.2",
         "vue-router": "^3.0.1",
         "vue-xgplayer": "^0.4.2",
